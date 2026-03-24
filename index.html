@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sofia Vyhmeister — Periodista Digital</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --verde: #7aab78;
+      --verde-claro: #e8f2e8;
+      --verde-oscuro: #4a7a48;
+      --crema: #f5f0e6;
+      --crema-oscuro: #e8e0d0;
+      --cafe: #3d2e22;
+      --cafe-claro: #8a7a6a;
+      --texto: #2e2018;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--crema);
+      color: var(--texto);
+      overflow-x: hidden;
+    }
+
+    img, video, iframe {
+      max-width: 100%;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(245, 240, 230, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--crema-oscuro);
+      padding: 0.9rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nav-idioma {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      cursor: pointer;
+      font-size: 0.78rem;
+      color: var(--cafe-claro);
+      border: 1px solid var(--cafe-claro);
+      padding: 0.35rem 0.85rem;
+      border-radius: 50px;
+      transition: all 0.2s ease;
+      background: transparent;
+    }
+
+    .nav-idioma:hover {
+      background: var(--verde);
+      color: white;
+      border-color: var(--verde);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.8rem;
+      list-style: none;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--cafe);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      position: relative;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background: var(--verde);
+      transition: width 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--verde);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .hero {
+      min-height: 100vh;
+      background: var(--crema);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 3rem 2rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .deco {
+      position: absolute;
+      pointer-events: none;
+      opacity: 0.12;
+      filter: grayscale(100%) contrast(1.1);
+    }
+
+    .deco-tl {
+      top: -20px;
+      left: -20px;
+      font-size: 160px;
+      transform: rotate(-25deg);
+    }
+
+    .deco-tr {
+      top: -10px;
+      right: -20px;
+      font-size: 140px;
+      transform: rotate(20deg);
+    }
+
+    .deco-bl {
+      bottom: 40px;
+      left: 30px;
+      font-size: 100px;
+      transform: rotate(15deg);
+    }
+
+    .deco-br {
+      bottom: 20px;
+      right: 20px;
+      font-size: 80px;
+    }
+
+    .hero-handwrite {
+      position: absolute;
+      font-family: 'Dancing Script', cursive;
+      font-size: 0.95rem;
+      color: var(--verde);
+      opacity: 0.55;
+      line-height: 2;
+    }
+
+    .hero-handwrite.left {
+      left: 2rem;
+      top: 50%;
+      transform: translateY(-50%) rotate(-4deg);
+      text-align: left;
+    }
+
+    .hero-handwrite.right {
+      right: 2rem;
+      top: 40%;
+      transform: translateY(-50%) rotate(3deg);
+      text-align: right;
+    }
+
+    .hero-centro {
+      position: relative;
+      z-index: 2;
+      max-width: 1100px;
+    }
+
+    .hero-sup {
+      font-size: 0.75rem;
+      letter-spacing: 0.35em;
+      color: var(--cafe-claro);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-titulo-wrap {
+      position: relative;
+      display: inline-block;
+    }
+
+    .hero-titulo-grande {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(4.5rem, 14vw, 11rem);
+      font-weight: 900;
+      color: var(--verde);
+      line-height: 0.82;
+      letter-spacing: -0.02em;
+      display: block;
+    }
+
+    .hero-script-overlay {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(2.4rem, 7vw, 5rem);
+      color: var(--crema-oscuro);
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      z-index: 3;
+      bottom: -12px;
+      opacity: 0.75;
+    }
+
+    .hero-digital {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.2rem, 10vw, 8rem);
+      font-weight: 900;
+      color: var(--verde);
+      line-height: 0.85;
+      letter-spacing: -0.02em;
+      display: block;
+    }
+
+    .hero-nombre {
+      font-size: 0.78rem;
+      letter-spacing: 0.3em;
+      color: var(--cafe-claro);
+      text-transform: uppercase;
+      margin-top: 2rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .hero-uni {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      color: var(--cafe-claro);
+      opacity: 0.8;
+      margin-bottom: 2rem;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.75rem 2rem;
+      border-radius: 50px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+      text-transform: uppercase;
+    }
+
+    .btn-verde {
+      background: var(--verde);
+      color: white;
+    }
+
+    .btn-verde:hover {
+      background: var(--verde-oscuro);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--cafe);
+      border: 1.5px solid var(--cafe);
+    }
+
+    .btn-outline:hover {
+      background: var(--cafe);
+      color: white;
+    }
+
+    .cinta-wrapper {
+      background: var(--verde);
+      padding: 0.65rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .cinta-track {
+      display: inline-flex;
+      animation: cinta 28s linear infinite;
+    }
+
+    .cinta-item {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: white;
+      padding: 0 2rem;
+    }
+
+    .cinta-sep {
+      color: rgba(255,255,255,0.35);
+      padding: 0 0.5rem;
+    }
+
+    @keyframes cinta {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .seccion {
+      padding: 5rem 5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .seccion-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--verde);
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .seccion-titulo {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      color: var(--cafe);
+      margin-bottom: 0.5rem;
+      font-style: italic;
+    }
+
+    .linea-verde {
+      width: 40px;
+      height: 3px;
+      background: var(--verde);
+      border-radius: 2px;
+      margin-bottom: 3rem;
+    }
+
+    #sobre-mi {
+      background: var(--crema);
+    }
+
+    .sobre-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .sobre-texto p {
+      font-size: 0.95rem;
+      color: var(--cafe-claro);
+      line-height: 1.9;
+      margin-bottom: 1rem;
+    }
+
+    .sobre-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .tag {
+      border: 1.5px solid var(--verde);
+      color: var(--verde);
+      font-size: 0.78rem;
+      padding: 0.3rem 1rem;
+      border-radius: 50px;
+      font-weight: 500;
+    }
+
+    .sobre-foto img {
+      width: 100%;
+      border-radius: 16px;
+      object-fit: cover;
+      aspect-ratio: 3 / 4;
+      border: 3px solid var(--verde-claro);
+      display: block;
+    }
+
+    .sobre-foto-placeholder {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      background: var(--verde-claro);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      color: var(--verde);
+      border: 2px dashed var(--verde);
+    }
+
+    .habilidades-seccion {
+      background: var(--crema-oscuro);
+      padding: 5rem;
+    }
+
+    .habilidades-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.2rem;
+    }
+
+    .habilidad-card {
+      background: var(--crema);
+      border-radius: 16px;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      border: 1px solid rgba(122,171,120,0.25);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .habilidad-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 28px rgba(122,171,120,0.18);
+    }
+
+    .habilidad-icono {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background: var(--verde-claro);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 0.9rem;
+      font-size: 1.5rem;
+    }
+
+    .habilidad-card h3 {
+      font-size: 0.88rem;
+      color: var(--cafe);
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    .habilidad-card p {
+      font-size: 0.76rem;
+      color: var(--cafe-claro);
+      line-height: 1.5;
+    }
+
+    #proyectos {
+      background: var(--crema);
+    }
+
+    .proyectos-lista {
+      display: flex;
+      flex-direction: column;
+      gap: 4rem;
+    }
+
+    .proyecto-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+      padding-bottom: 4rem;
+      border-bottom: 1px dashed var(--crema-oscuro);
+    }
+
+    .proyecto-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .proyecto-num {
+      font-size: 4rem;
+      font-weight: 900;
+      color: rgba(122,171,120,0.12);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .proyecto-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--verde);
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .proyecto-titulo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      color: var(--cafe);
+      margin-bottom: 0.8rem;
+      font-style: italic;
+    }
+
+    .proyecto-desc {
+      font-size: 0.88rem;
+      color: var(--cafe-claro);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .proyecto-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .proyecto-tag {
+      background: var(--verde);
+      color: white;
+      font-size: 0.72rem;
+      padding: 0.28rem 0.8rem;
+      border-radius: 50px;
+    }
+
+    .tesis-box {
+      height: 420px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--crema-oscuro);
+      border-left: 4px solid var(--verde);
+      background: white;
+    }
+
+    .tesis-box iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .video-wrapper {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--crema-oscuro);
+      background: #111;
+      aspect-ratio: 16 / 9;
+    }
+
+    .video-wrapper video {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .rrss-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .reel-video {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--crema-oscuro);
+      background: #111;
+      aspect-ratio: 9 / 16;
+    }
+
+    .reel-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .publicaciones-seccion {
+      background: var(--crema-oscuro);
+      padding: 5rem;
+    }
+
+    .pub-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .pub-card {
+      background: var(--crema);
+      border-radius: 16px;
+      padding: 2rem;
+      border: 1px solid rgba(122,171,120,0.2);
+      border-top: 4px solid var(--verde);
+      transition: transform 0.2s ease;
+    }
+
+    .pub-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .pub-meta {
+      font-size: 0.72rem;
+      color: var(--verde);
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+
+    .pub-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--cafe);
+      margin-bottom: 0.8rem;
+      font-style: italic;
+    }
+
+    .pub-card p {
+      font-size: 0.84rem;
+      color: var(--cafe-claro);
+      line-height: 1.7;
+      margin-bottom: 1.2rem;
+    }
+
+    .pub-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      color: var(--verde);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border-bottom: 1px solid var(--verde);
+      padding-bottom: 0.1rem;
+      transition: opacity 0.2s ease;
+    }
+
+    .pub-link:hover {
+      opacity: 0.7;
+    }
+
+    .contacto-seccion {
+      background: var(--cafe);
+      padding: 5rem;
+    }
+
+    .contacto-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .contacto-left .seccion-label {
+      color: var(--verde);
+    }
+
+    .contacto-left .seccion-titulo {
+      color: white;
+    }
+
+    .contacto-left > p {
+      color: rgba(255,255,255,0.65);
+      font-size: 0.9rem;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .contacto-redes {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .contacto-red {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      padding: 0.8rem 1.2rem;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.2s ease;
+      color: white;
+    }
+
+    .contacto-red:hover {
+      background: rgba(255,255,255,0.07);
+      border-color: var(--verde);
+    }
+
+    .contacto-red-icono {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--verde);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .contacto-red-info strong {
+      display: block;
+      font-size: 0.84rem;
+    }
+
+    .contacto-red-info span {
+      font-size: 0.76rem;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .form-label {
+      color: rgba(255,255,255,0.4);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+
+    .form-contacto {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .form-contacto input,
+    .form-contacto textarea {
+      width: 100%;
+      padding: 0.9rem 1.2rem;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px;
+      color: white;
+      font-size: 0.88rem;
+      font-family: 'DM Sans', sans-serif;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .form-contacto input::placeholder,
+    .form-contacto textarea::placeholder {
+      color: rgba(255,255,255,0.3);
+    }
+
+    .form-contacto input:focus,
+    .form-contacto textarea:focus {
+      border-color: var(--verde);
+    }
+
+    .form-contacto textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .form-exito,
+    .form-error {
+      display: none;
+      margin-top: 1rem;
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+      font-size: 0.88rem;
+      color: white;
+    }
+
+    .form-exito {
+      background: rgba(122,171,120,0.2);
+      border: 1px solid var(--verde);
+    }
+
+    .form-error {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .chat-boton {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--verde);
+      color: white;
+      font-size: 1.3rem;
+      border: none;
+      cursor: pointer;
+      z-index: 999;
+      box-shadow: 0 4px 18px rgba(122,171,120,0.45);
+      transition: transform 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chat-boton:hover {
+      transform: scale(1.08);
+    }
+
+    .chat-ventana {
+      position: fixed;
+      bottom: 5.5rem;
+      right: 2rem;
+      width: 315px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.14);
+      z-index: 998;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      border: 0.5px solid var(--crema-oscuro);
+    }
+
+    .chat-ventana.abierto {
+      display: flex;
+    }
+
+    .chat-header {
+      background: var(--verde);
+      padding: 0.9rem 1.1rem;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .chat-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    .chat-header-info strong {
+      font-size: 0.88rem;
+      display: block;
+    }
+
+    .chat-header-info span {
+      font-size: 0.72rem;
+      opacity: 0.85;
+    }
+
+    .chat-mensajes {
+      padding: 1rem;
+      height: 250px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .chat-burbuja {
+      max-width: 85%;
+      padding: 0.65rem 0.95rem;
+      border-radius: 12px;
+      font-size: 0.83rem;
+      line-height: 1.5;
+      white-space: pre-line;
+    }
+
+    .chat-burbuja.sofia {
+      background: var(--verde-claro);
+      color: var(--cafe);
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+    }
+
+    .chat-burbuja.usuario {
+      background: var(--verde);
+      color: white;
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+
+    .chat-cargando {
+      align-self: flex-start;
+      margin: 0 1rem 1rem;
+      padding: 0.65rem 0.95rem;
+      background: var(--verde-claro);
+      border-radius: 12px;
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      display: none;
+      width: fit-content;
+    }
+
+    .chat-input-area {
+      padding: 0.7rem;
+      border-top: 1px solid var(--crema-oscuro);
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .chat-input {
+      flex: 1;
+      padding: 0.55rem 0.9rem;
+      border: 1px solid var(--crema-oscuro);
+      border-radius: 50px;
+      font-size: 0.83rem;
+      font-family: 'DM Sans', sans-serif;
+      outline: none;
+    }
+
+    .chat-input:focus {
+      border-color: var(--verde);
+    }
+
+    .chat-enviar {
+      background: var(--verde);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 34px;
+      height: 34px;
+      cursor: pointer;
+      font-size: 0.88rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chat-enviar:hover {
+      background: var(--verde-oscuro);
+    }
+
+    footer {
+      background: #2a1e12;
+      padding: 1.4rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    footer p {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.1em;
+    }
+
+    @media (max-width: 900px) {
+      nav {
+        padding: 1rem 1.5rem;
+        flex-direction: column;
+      }
+
+      .seccion,
+      .habilidades-seccion,
+      .publicaciones-seccion,
+      .contacto-seccion {
+        padding: 3rem 1.5rem;
+      }
+
+      .sobre-grid,
+      .proyecto-item,
+      .pub-grid,
+      .contacto-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .habilidades-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero-handwrite {
+        display: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links {
+        gap: 0.8rem;
+      }
+
+      .nav-links a {
+        font-size: 0.7rem;
+      }
+
+      .habilidades-grid,
+      .rrss-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .chat-ventana {
+        width: 290px;
+        right: 1rem;
+        bottom: 5rem;
+      }
+
+      .chat-boton {
+        right: 1rem;
+        bottom: 1rem;
+      }
+
+      .hero-titulo-grande {
+        font-size: clamp(3.5rem, 16vw, 6rem);
+      }
+
+      .hero-digital {
+        font-size: clamp(2.8rem, 12vw, 4.5rem);
+      }
+
+      .hero-script-overlay {
+        bottom: -4px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <button class="nav-idioma" onclick="cambiarIdioma()" type="button">
+      <span>🌐</span>
+      <span id="idioma-texto">EN</span>
+    </button>
+
+    <ul class="nav-links">
+      <li><a href="#sobre-mi" data-es="Sobre mí" data-en="About me">Sobre mí</a></li>
+      <li><a href="#habilidades" data-es="Habilidades" data-en="Skills">Habilidades</a></li>
+      <li><a href="#proyectos" data-es="Proyectos" data-en="Projects">Proyectos</a></li>
+      <li><a href="#publicaciones" data-es="Publicaciones" data-en="Publications">Publicaciones</a></li>
+      <li><a href="#contacto" data-es="Contacto" data-en="Contact">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="deco deco-tl">🌿</div>
+    <div class="deco deco-tr">🍃</div>
+    <div class="deco deco-bl">🌱</div>
+    <div class="deco deco-br">🦋</div>
+
+    <div class="hero-handwrite left"
+      data-es="periodismo · datos · narrativa&#10;comunicación digital&#10;historias que importan"
+      data-en="journalism · data · narrative&#10;digital communication&#10;stories that matter">
+      periodismo · datos · narrativa<br>
+      comunicación digital<br>
+      historias que importan
+    </div>
+
+    <div class="hero-handwrite right"
+      data-es="python · vs code · ia&#10;minería de texto&#10;APIs · audiovisual"
+      data-en="python · vs code · ai&#10;text mining&#10;APIs · audiovisual">
+      python · vs code · ia<br>
+      minería de texto<br>
+      APIs · audiovisual
+    </div>
+
+    <div class="hero-centro">
+      <p class="hero-sup" data-es="portafolio profesional" data-en="professional portfolio">portafolio profesional</p>
+
+      <div class="hero-titulo-wrap">
+        <span class="hero-titulo-grande">PERIODISTA</span>
+        <span class="hero-script-overlay" data-es="& portafolio" data-en="& portfolio">& portafolio</span>
+      </div>
+
+      <span class="hero-digital">DIGITAL</span>
+
+      <p class="hero-nombre">Sofia Vyhmeister Fuentes</p>
+      <p class="hero-uni" data-es="Universidad del Desarrollo · Concepción, Chile" data-en="Universidad del Desarrollo · Concepción, Chile">
+        Universidad del Desarrollo · Concepción, Chile
+      </p>
+
+      <div class="hero-btns">
+        <a href="#proyectos" class="btn btn-verde" data-es="Ver proyectos" data-en="View projects">Ver proyectos</a>
+        <a href="#contacto" class="btn btn-outline" data-es="Contactarme" data-en="Contact me">Contactarme</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="cinta-wrapper">
+    <div class="cinta-track">
+      <span class="cinta-item" data-es="Periodismo Corporativo" data-en="Corporate Journalism">Periodismo Corporativo</span><span class="cinta-sep">✦</span>
+      <span class="cinta-item" data-es="Datos e IA" data-en="Data & AI">Datos e IA</span><span class="cinta-sep">✦</span>
+      <span class="cinta-item" data-es="Audiovisual" data-en="Audiovisual">Audiovisual</span><span class="cinta-sep">✦</span>
+      <span class="cinta-item" data-es="Community Manager" data-en="Community Manager">Community Manager</span><span class="cinta-sep">✦</span>
+      <span class="cinta-item" data-es="Agencias" data-en="Agencies">Agencias</span><span class="cinta-sep">✦</span>
+      <span class="cinta-item" data-es="Periodismo Corporativo" data-en="Corporate Journalism">Periodismo Corporativo</span><span class="cinta-sep">✦</span>
+      <span class="cinta-item" data-es="Datos e IA" data-en="Data & AI">Datos e IA</span><span class="cinta-sep">✦</span>
+      <span class="cinta-item" data-es="Audiovisual" data-en="Audiovisual">Audiovisual</span><span class="cinta-sep">✦</span>
+      <span class="cinta-item" data-es="Community Manager" data-en="Community Manager">Community Manager</span><span class="cinta-sep">✦</span>
+      <span class="cinta-item" data-es="Agencias" data-en="Agencies">Agencias</span><span class="cinta-sep">✦</span>
+    </div>
+  </div>
+
+  <section id="sobre-mi">
+    <div class="seccion">
+      <p class="seccion-label" data-es="sobre mí" data-en="about me">sobre mí</p>
+      <h2 class="seccion-titulo" data-es="¡Hola! Soy Sofia Vyhmeister" data-en="Hi! I'm Sofia Vyhmeister">¡Hola! Soy Sofia Vyhmeister</h2>
+      <div class="linea-verde"></div>
+
+      <div class="sobre-grid">
+        <div class="sobre-texto">
+          <p data-es="Estudiante de Periodismo en la Universidad del Desarrollo, orientada a comunicaciones corporativas, con experiencia en redacción, cobertura y creación de contenido para difusión institucional."
+             data-en="Journalism student at Universidad del Desarrollo, focused on corporate communications, with experience in writing, coverage, and content creation for institutional outreach.">
+            Estudiante de Periodismo en la Universidad del Desarrollo, orientada a comunicaciones corporativas, con experiencia en redacción, cobertura y creación de contenido para difusión institucional.
+          </p>
+
+          <p data-es="Tengo un perfil que cruza el mundo editorial con el técnico. Mi tesis analizó eufemismos en TV chilena aplicando minería de texto con Python, una metodología poco común en el periodismo chileno."
+             data-en="My profile bridges the editorial and technical worlds. My thesis analyzed euphemisms in Chilean TV using Python text mining, an uncommon methodology in Chilean journalism.">
+            Tengo un perfil que cruza el mundo editorial con el técnico. Mi tesis analizó eufemismos en TV chilena aplicando minería de texto con Python, una metodología poco común en el periodismo chileno.
+          </p>
+
+          <p data-es="Construí desde cero una herramienta de análisis de noticias con APIs de IA. No solo escribo las historias, también construyo las herramientas para encontrarlas."
+             data-en="I built a news analysis tool from scratch using AI APIs. I do not just write stories, I also build the tools to find them.">
+            Construí desde cero una herramienta de análisis de noticias con APIs de IA. No solo escribo las historias, también construyo las herramientas para encontrarlas.
+          </p>
+
+          <div class="sobre-tags">
+            <span class="tag" data-es="Periodismo de datos" data-en="Data Journalism">Periodismo de datos</span>
+            <span class="tag" data-es="Com. corporativa" data-en="Corporate Comm.">Com. corporativa</span>
+            <span class="tag" data-es="Producción AV" data-en="AV Production">Producción AV</span>
+            <span class="tag" data-es="Minería de texto" data-en="Text Mining">Minería de texto</span>
+            <span class="tag" data-es="Español · Inglés · Alemán" data-en="Spanish · English · German">Español · Inglés · Alemán</span>
+          </div>
+        </div>
+
+        <div class="sobre-foto">
+          <img src="./images/sobre-mi.jpeg" alt="Sofia Vyhmeister"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="sobre-foto-placeholder" style="display:none;">SV</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="habilidades" class="habilidades-seccion">
+    <div class="seccion" style="padding-top:0; padding-bottom:0;">
+      <p class="seccion-label" data-es="habilidades" data-en="skills">habilidades</p>
+      <h2 class="seccion-titulo" data-es="Lo que sé hacer" data-en="What I do">Lo que sé hacer</h2>
+      <div class="linea-verde"></div>
+
+      <div class="habilidades-grid">
+        <div class="habilidad-card">
+          <div class="habilidad-icono">📱</div>
+          <h3 data-es="Gestión de RRSS" data-en="Social Media">Gestión de RRSS</h3>
+          <p data-es="Instagram, Facebook, TikTok" data-en="Instagram, Facebook, TikTok">Instagram, Facebook, TikTok</p>
+        </div>
+
+        <div class="habilidad-card">
+          <div class="habilidad-icono">📊</div>
+          <h3 data-es="Análisis de métricas" data-en="Metrics Analysis">Análisis de métricas</h3>
+          <p data-es="Optimización de contenido" data-en="Content optimization">Optimización de contenido</p>
+        </div>
+
+        <div class="habilidad-card">
+          <div class="habilidad-icono">📋</div>
+          <h3>Excel & Word</h3>
+          <p data-es="Gestión y documentación" data-en="Management & documentation">Gestión y documentación</p>
+        </div>
+
+        <div class="habilidad-card">
+          <div class="habilidad-icono">🐍</div>
+          <h3>Python / VS Code</h3>
+          <p data-es="Minería de texto y scripts" data-en="Text mining & scripts">Minería de texto y scripts</p>
+        </div>
+
+        <div class="habilidad-card">
+          <div class="habilidad-icono">🎥</div>
+          <h3 data-es="Producción audiovisual" data-en="Audiovisual Production">Producción audiovisual</h3>
+          <p data-es="Grabación, edición, fotografía" data-en="Recording, editing, photography">Grabación, edición, fotografía</p>
+        </div>
+
+        <div class="habilidad-card">
+          <div class="habilidad-icono">✍️</div>
+          <h3 data-es="Redacción periodística" data-en="Journalistic Writing">Redacción periodística</h3>
+          <p data-es="Prensa digital y corporativa" data-en="Digital & corporate press">Prensa digital y corporativa</p>
+        </div>
+
+        <div class="habilidad-card">
+          <div class="habilidad-icono">🤖</div>
+          <h3>APIs e IA</h3>
+          <p data-es="Integración y automatización" data-en="Integration & automation">Integración y automatización</p>
+        </div>
+
+        <div class="habilidad-card">
+          <div class="habilidad-icono">🎤</div>
+          <h3 data-es="Cobertura de eventos" data-en="Event Coverage">Cobertura de eventos</h3>
+          <p data-es="Testimonios y contenido en vivo" data-en="Testimonials & live content">Testimonios y contenido en vivo</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="proyectos">
+    <div class="seccion">
+      <p class="seccion-label" data-es="proyectos" data-en="projects">proyectos</p>
+      <h2 class="seccion-titulo" data-es="Mi trabajo" data-en="My work">Mi trabajo</h2>
+      <div class="linea-verde"></div>
+
+      <div class="proyectos-lista">
+        <div class="proyecto-item">
+          <div>
+            <div class="proyecto-num">01</div>
+            <p class="proyecto-label" data-es="Periodismo de datos" data-en="Data Journalism">Periodismo de datos</p>
+            <h3 class="proyecto-titulo" data-es="Tesis: Eufemismos en TV chilena" data-en="Thesis: Euphemisms in Chilean TV">Tesis: Eufemismos en TV chilena</h3>
+            <p class="proyecto-desc"
+               data-es="Análisis de contenido mixto combinando matriz de análisis manual con minería de texto en Python sobre medios televisivos nacionales."
+               data-en="Mixed content analysis combining manual analysis with Python text mining on national television media.">
+              Análisis de contenido mixto combinando matriz de análisis manual con minería de texto en Python sobre medios televisivos nacionales.
+            </p>
+
+            <div class="proyecto-tags">
+              <span class="proyecto-tag">Python</span>
+              <span class="proyecto-tag">VS Code</span>
+              <span class="proyecto-tag" data-es="Minería de texto" data-en="Text mining">Minería de texto</span>
+            </div>
+          </div>
+
+          <div class="tesis-box">
+            <iframe src="https://drive.google.com/file/d/134DYjjzViuu0olgTKgdZjRkSsES8Lk9S/preview" allow="autoplay"></iframe>
+          </div>
+        </div>
+
+        <div class="proyecto-item">
+          <div>
+            <div class="proyecto-num">02</div>
+            <p class="proyecto-label" data-es="Herramienta propia" data-en="Personal tool">Herramienta propia</p>
+            <h3 class="proyecto-titulo" data-es="Analizador de noticias con IA" data-en="AI News Analyzer">Analizador de noticias con IA</h3>
+            <p class="proyecto-desc"
+               data-es="Herramienta construida en VS Code con integración de API Key para seleccionar, clasificar, calificar y resumir noticias automáticamente."
+               data-en="Tool built in VS Code with API key integration to automatically select, classify, rate and summarize news.">
+              Herramienta construida en VS Code con integración de API Key para seleccionar, clasificar, calificar y resumir noticias automáticamente.
+            </p>
+
+            <div class="video-wrapper" style="display:flex; align-items:center; justify-content:center; color:white; padding:2rem; text-align:center;">
+              <p>Video del analizador disponible próximamente.</p>
+            </div>
+
+        <div class="proyecto-item">
+          <div>
+            <div class="proyecto-num">03</div>
+            <p class="proyecto-label" data-es="Contenido digital" data-en="Digital content">Contenido digital</p>
+            <h3 class="proyecto-titulo" data-es="Contenido RRSS estratégico" data-en="Strategic Social Media Content">Contenido RRSS estratégico</h3>
+            <p class="proyecto-desc"
+               data-es="Planificación comunicacional y editorial, creación de reels y análisis de métricas para crecimiento orgánico."
+               data-en="Communication and editorial planning, reel creation and metrics analysis for organic growth.">
+              Planificación comunicacional y editorial, creación de reels y análisis de métricas para crecimiento orgánico.
+            </p>
+
+            <div class="proyecto-tags">
+              <span class="proyecto-tag">Reels</span>
+              <span class="proyecto-tag" data-es="Estrategia" data-en="Strategy">Estrategia</span>
+              <span class="proyecto-tag" data-es="Métricas" data-en="Metrics">Métricas</span>
+            </div>
+          </div>
+
+          <div class="rrss-grid">
+            <div class="reel-video">
+              <video controls preload="metadata" playsinline>
+                <source src="./videos/reel1.mp4" type="video/mp4">
+                Tu navegador no soporta video HTML5.
+              </video>
+            </div>
+
+            <div class="reel-video">
+              <video controls preload="metadata" playsinline>
+                <source src="./videos/reel2.mp4" type="video/mp4">
+                Tu navegador no soporta video HTML5.
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="publicaciones" class="publicaciones-seccion">
+    <div class="seccion" style="padding-top:0; padding-bottom:0;">
+      <p class="seccion-label" data-es="publicaciones" data-en="publications">publicaciones</p>
+      <h2 class="seccion-titulo" data-es="En prensa" data-en="In press">En prensa</h2>
+      <div class="linea-verde"></div>
+
+      <div class="pub-grid">
+        <div class="pub-card">
+          <p class="pub-meta">Revista NOS · 12 Dic 2024</p>
+          <h3 data-es="20 emprendimientos reconocidos en Santa Juana" data-en="20 businesses recognized in Santa Juana">
+            20 emprendimientos reconocidos en Santa Juana
+          </h3>
+          <p data-es="Veinte emprendimientos fueron reconocidos por ganar la nueva edición del programa 'Yo emprendo Fortalece Santa Juana', una iniciativa que apoya el desarrollo económico local."
+             data-en="Twenty businesses were recognized for winning the 'Yo emprendo Fortalece Santa Juana' program, supporting local economic development.">
+            Veinte emprendimientos fueron reconocidos por ganar la nueva edición del programa "Yo emprendo Fortalece Santa Juana".
+          </p>
+          <a href="https://revistanos.cl/20-emprendimientos-fueron-reconocidos-por-ganar-la-nueva-edicion-del-programa-yo-emprendo-fortalece-santa-juana/"
+             class="pub-link"
+             target="_blank"
+             rel="noopener noreferrer"
+             data-es="Leer artículo →"
+             data-en="Read article →">Leer artículo →</a>
+        </div>
+
+        <div class="pub-card">
+          <p class="pub-meta">Revista NOS · 14 Dic 2024</p>
+          <h3 data-es="La magia de la Navidad llega al Parque Alessandri" data-en="Christmas magic arrives at Parque Alessandri">
+            La magia de la Navidad llega al Parque Alessandri
+          </h3>
+          <p data-es="Un concierto gratuito marcó el inicio de las festividades navideñas en el Parque Alessandri de Concepción, convocando a cientos de familias."
+             data-en="A free concert marked the beginning of Christmas festivities at Parque Alessandri in Concepción, bringing together hundreds of families.">
+            Un concierto gratuito marcó el inicio de las festividades navideñas en el Parque Alessandri de Concepción.
+          </p>
+          <a href="https://revistanos.cl/la-magia-de-la-navidad-llega-al-parque-alessandri-con-un-concierto-gratuito-el-domingo-15-de-diciembre/"
+             class="pub-link"
+             target="_blank"
+             rel="noopener noreferrer"
+             data-es="Leer artículo →"
+             data-en="Read article →">Leer artículo →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="contacto" class="contacto-seccion">
+    <div class="contacto-inner">
+      <div class="contacto-left">
+        <p class="seccion-label" data-es="contacto" data-en="contact">contacto</p>
+        <h2 class="seccion-titulo" data-es="¡Colaboremos!" data-en="Let's collaborate!">¡Colaboremos!</h2>
+        <div class="linea-verde"></div>
+
+        <p data-es="Disponible para pasantías en periodismo corporativo, agencias de comunicación y equipos de contenido digital."
+           data-en="Available for internships in corporate journalism, communication agencies and digital content teams.">
+          Disponible para pasantías en periodismo corporativo, agencias de comunicación y equipos de contenido digital.
+        </p>
+
+        <div class="contacto-redes">
+          <a href="mailto:svyhmeisterf@gmail.com" class="contacto-red">
+            <div class="contacto-red-icono">✉️</div>
+            <div class="contacto-red-info">
+              <strong>Email</strong>
+              <span>svyhmeisterf@gmail.com</span>
+            </div>
+          </a>
+
+          <a href="https://www.linkedin.com/in/sofia-vyhmeister-fuentes-834555185" class="contacto-red" target="_blank" rel="noopener noreferrer">
+            <div class="contacto-red-icono">💼</div>
+            <div class="contacto-red-info">
+              <strong>LinkedIn</strong>
+              <span>Sofia Vyhmeister Fuentes</span>
+            </div>
+          </a>
+
+          <a href="https://instagram.com/fimaista" class="contacto-red" target="_blank" rel="noopener noreferrer">
+            <div class="contacto-red-icono">📸</div>
+            <div class="contacto-red-info">
+              <strong>Instagram</strong>
+              <span>@fimaista</span>
+            </div>
+          </a>
+
+          <a href="https://wa.me/56975826729" class="contacto-red" target="_blank" rel="noopener noreferrer">
+            <div class="contacto-red-icono">💬</div>
+            <div class="contacto-red-info">
+              <strong>WhatsApp</strong>
+              <span>+56 9 7582 6729</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <span class="form-label" data-es="o escríbeme directamente" data-en="or write to me directly">o escríbeme directamente</span>
+
+        <form class="form-contacto"
+              action="https://formspree.io/f/TU_CODIGO"
+              method="POST"
+              onsubmit="formularioEnviado(event)">
+          <input type="text"
+                 name="nombre"
+                 required
+                 placeholder="Tu nombre"
+                 data-placeholder-es="Tu nombre"
+                 data-placeholder-en="Your name">
+
+          <input type="email"
+                 name="email"
+                 required
+                 placeholder="Tu email"
+                 data-placeholder-es="Tu email"
+                 data-placeholder-en="Your email">
+
+          <textarea name="mensaje"
+                    required
+                    placeholder="Tu mensaje..."
+                    data-placeholder-es="Tu mensaje..."
+                    data-placeholder-en="Your message..."></textarea>
+
+          <button type="submit" class="btn btn-verde" data-es="Enviar mensaje" data-en="Send message">Enviar mensaje</button>
+        </form>
+
+        <div class="form-exito" id="formExito">
+          ✅ <span data-es="¡Mensaje enviado! Te responderé pronto." data-en="Message sent! I will get back to you soon.">¡Mensaje enviado! Te responderé pronto.</span>
+        </div>
+
+        <div class="form-error" id="formError">
+          ⚠️ <span data-es="No se pudo enviar el formulario. Revisa tu código de Formspree o escríbeme por correo."
+                   data-en="The form could not be sent. Check your Formspree code or email me directly.">
+            No se pudo enviar el formulario. Revisa tu código de Formspree o escríbeme por correo.
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 Sofia Vyhmeister Fuentes</p>
+    <p>svyhmeisterf.github.io</p>
+  </footer>
+
+  <button class="chat-boton" onclick="toggleChat()" type="button">💬</button>
+
+  <div class="chat-ventana" id="chatVentana">
+    <div class="chat-header">
+      <div class="chat-avatar">SV</div>
+      <div class="chat-header-info">
+        <strong>Sofia Vyhmeister</strong>
+        <span data-es="Periodista Digital · en línea" data-en="Digital Journalist · online">Periodista Digital · en línea</span>
+      </div>
+    </div>
+
+    <div class="chat-mensajes" id="chatMensajes">
+      <div class="chat-burbuja sofia" id="mensajeInicial">
+        ¡Hola! Soy Sofia 👋 Estudiante de periodismo con perfil técnico. ¿Tienes alguna pregunta sobre mi trabajo?
+      </div>
+    </div>
+
+    <div class="chat-cargando" id="chatCargando">···</div>
+
+    <div class="chat-input-area">
+      <input class="chat-input"
+             id="chatInput"
+             placeholder="Escribe tu pregunta..."
+             data-placeholder-es="Escribe tu pregunta..."
+             data-placeholder-en="Write your question..."
+             onkeypress="if(event.key==='Enter') enviarMensaje()">
+      <button class="chat-enviar" onclick="enviarMensaje()" type="button">➤</button>
+    </div>
+  </div>
+
+  <script>
+    let idiomaActual = 'es';
+
+    function cambiarIdioma() {
+      idiomaActual = idiomaActual === 'es' ? 'en' : 'es';
+
+      document.getElementById('idioma-texto').textContent = idiomaActual === 'es' ? 'EN' : 'ES';
+
+      document.querySelectorAll('[data-es]').forEach(el => {
+        const nuevoTexto = el.getAttribute('data-' + idiomaActual);
+        if (nuevoTexto) {
+          el.textContent = nuevoTexto;
+        }
+      });
+
+      document.querySelectorAll('[data-placeholder-es]').forEach(el => {
+        const nuevoPlaceholder = el.getAttribute('data-placeholder-' + idiomaActual);
+        if (nuevoPlaceholder) {
+          el.placeholder = nuevoPlaceholder;
+        }
+      });
+
+      const mensajeInicial = document.getElementById('mensajeInicial');
+      if (mensajeInicial) {
+        mensajeInicial.textContent = idiomaActual === 'es'
+          ? '¡Hola! Soy Sofia 👋 Estudiante de periodismo con perfil técnico. ¿Tienes alguna pregunta sobre mi trabajo?'
+          : "Hi! I'm Sofia 👋 A journalism student with a technical profile. Do you have any questions about my work?";
+      }
+    }
+
+    async function formularioEnviado(e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const exito = document.getElementById('formExito');
+      const error = document.getElementById('formError');
+
+      exito.style.display = 'none';
+      error.style.display = 'none';
+
+      if (form.action.includes('TU_CODIGO')) {
+        error.style.display = 'block';
+        return;
+      }
+
+      try {
+        const respuesta = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (respuesta.ok) {
+          form.reset();
+          form.style.display = 'none';
+          exito.style.display = 'block';
+        } else {
+          error.style.display = 'block';
+        }
+      } catch (err) {
+        error.style.display = 'block';
+      }
+    }
+
+    function toggleChat() {
+      document.getElementById('chatVentana').classList.toggle('abierto');
+    }
+
+    function agregarMensaje(texto, tipo) {
+      const contenedor = document.getElementById('chatMensajes');
+      const burbuja = document.createElement('div');
+      burbuja.className = 'chat-burbuja ' + tipo;
+      burbuja.textContent = texto;
+      contenedor.appendChild(burbuja);
+      contenedor.scrollTop = contenedor.scrollHeight;
+    }
+
+    function obtenerRespuestaLocal(texto) {
+      const t = texto.toLowerCase();
+
+      const respuestas = {
+        es: {
+          saludo: "¡Hola! Gracias por visitar mi portafolio. Puedo contarte sobre mi tesis, mis proyectos, mi experiencia o mis habilidades.",
+          tesis: "Mi tesis analizó el uso de eufemismos en la TV chilena combinando análisis manual y minería de texto con Python.",
+          proyectos: "En mi portafolio destaco tres líneas: tesis en periodismo de datos, un analizador de noticias con IA y contenido estratégico para redes sociales.",
+          experiencia: "Tengo experiencia en redacción y creación de contenido en espacios como Revista NOS, además de proyectos institucionales y audiovisuales.",
+          habilidades: "Mis habilidades incluyen redacción periodística, RRSS, producción audiovisual, Python, VS Code, minería de texto, APIs de IA, Excel y Word.",
+          idiomas: "Hablo español nativo, inglés intermedio y alemán básico.",
+          contacto: "Puedes contactarme por correo en svyhmeisterf@gmail.com, por LinkedIn o por WhatsApp desde la sección de contacto.",
+          default: "Puedo ayudarte con información sobre mi tesis, proyectos, experiencia, habilidades, idiomas o contacto."
+        },
+        en: {
+          saludo: "Hi! Thanks for visiting my portfolio. I can tell you about my thesis, projects, experience or skills.",
+          tesis: "My thesis analyzed euphemisms in Chilean TV by combining manual analysis and Python text mining.",
+          proyectos: "My portfolio highlights three main areas: data journalism research, an AI news analyzer and strategic social media content.",
+          experiencia: "I have experience in writing and content creation in spaces such as Revista NOS, along with institutional and audiovisual projects.",
+          habilidades: "My skills include journalistic writing, social media, audiovisual production, Python, VS Code, text mining, AI APIs, Excel and Word.",
+          idiomas: "I speak native Spanish, intermediate English and basic German.",
+          contacto: "You can contact me by email at svyhmeisterf@gmail.com, through LinkedIn or via WhatsApp in the contact section.",
+          default: "I can help with information about my thesis, projects, experience, skills, languages or contact details."
+        }
+      };
+
+      const r = respuestas[idiomaActual];
+
+      if (t.includes('hola') || t.includes('hi') || t.includes('hello')) return r.saludo;
+      if (t.includes('tesis') || t.includes('thesis') || t.includes('eufem')) return r.tesis;
+      if (t.includes('proyecto') || t.includes('project') || t.includes('trabajo') || t.includes('work')) return r.proyectos;
+      if (t.includes('experiencia') || t.includes('experience') || t.includes('revista nos')) return r.experiencia;
+      if (t.includes('habilidad') || t.includes('skill') || t.includes('python') || t.includes('rrss') || t.includes('excel') || t.includes('word')) return r.habilidades;
+      if (t.includes('idioma') || t.includes('language') || t.includes('english') || t.includes('alemán') || t.includes('german')) return r.idiomas;
+      if (t.includes('contacto') || t.includes('contact') || t.includes('correo') || t.includes('email') || t.includes('linkedin') || t.includes('whatsapp')) return r.contacto;
+
+      return r.default;
+    }
+
+    function enviarMensaje() {
+      const input = document.getElementById('chatInput');
+      const texto = input.value.trim();
+
+      if (!texto) return;
+
+      agregarMensaje(texto, 'usuario');
+      input.value = '';
+
+      const cargando = document.getElementById('chatCargando');
+      cargando.style.display = 'block';
+
+      setTimeout(() => {
+        cargando.style.display = 'none';
+        const respuesta = obtenerRespuestaLocal(texto);
+        agregarMensaje(respuesta, 'sofia');
+      }, 500);
+    }
+  </script>
+</body>
+</html>
