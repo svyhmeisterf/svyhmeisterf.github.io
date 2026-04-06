@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sofia Vyhmeister — Periodista Digital</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet" />
 
   <style>
     :root {
@@ -17,6 +17,10 @@
       --cafe: #3d2e22;
       --cafe-claro: #8a7a6a;
       --texto: #2e2018;
+      --blanco-suave: #fffdfa;
+      --borde-suave: 1px solid rgba(122, 171, 120, 0.14);
+      --sombra-suave: 0 14px 34px rgba(61, 46, 34, 0.06);
+      --sombra-media: 0 20px 44px rgba(61, 46, 34, 0.10);
     }
 
     * {
@@ -25,13 +29,21 @@
       box-sizing: border-box;
     }
 
+    ::selection {
+      background: var(--verde);
+      color: white;
+    }
+
     html {
       scroll-behavior: smooth;
     }
 
     body {
       font-family: 'DM Sans', sans-serif;
-      background: var(--crema);
+      background:
+        radial-gradient(circle at top left, rgba(122,171,120,0.08), transparent 28%),
+        radial-gradient(circle at 88% 18%, rgba(255,255,255,0.55), transparent 20%),
+        var(--crema);
       color: var(--texto);
       overflow-x: hidden;
     }
@@ -47,11 +59,19 @@
       background: rgba(245, 240, 230, 0.95);
       backdrop-filter: blur(8px);
       border-bottom: 1px solid var(--crema-oscuro);
-      padding: 0.9rem 3rem;
+      padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 1rem;
+      transition: background 0.25s ease, box-shadow 0.25s ease, padding 0.25s ease, border-color 0.25s ease;
+    }
+
+    nav.scrolled {
+      background: rgba(245, 240, 230, 0.98);
+      box-shadow: 0 10px 30px rgba(61, 46, 34, 0.08);
+      padding-top: 0.85rem;
+      padding-bottom: 0.85rem;
     }
 
     .nav-idioma {
@@ -76,7 +96,7 @@
 
     .nav-links {
       display: flex;
-      gap: 1.8rem;
+      gap: 1.6rem;
       list-style: none;
       flex-wrap: wrap;
       justify-content: center;
@@ -87,7 +107,7 @@
       color: var(--cafe);
       font-size: 0.8rem;
       font-weight: 500;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       position: relative;
       transition: color 0.2s ease;
@@ -112,168 +132,154 @@
       width: 100%;
     }
 
+    /* ===== HERO ===== */
+
     .hero {
-      min-height: 100vh;
-      background: var(--crema);
+      min-height: 92vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      text-align: center;
-      padding: 3rem 2rem 2rem;
+      padding: 2rem 2rem 3rem;
+      background: var(--crema);
       position: relative;
       overflow: hidden;
     }
 
-    .deco {
+    .hero::after {
+      content: "";
       position: absolute;
+      right: -80px;
+      bottom: -80px;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: rgba(122, 171, 120, 0.10);
+      filter: blur(40px);
       pointer-events: none;
-      opacity: 0.12;
-      filter: grayscale(100%) contrast(1.1);
     }
 
-    .deco-tl {
-      top: -20px;
-      left: -20px;
-      font-size: 160px;
-      transform: rotate(-25deg);
+    .hero-grid {
+      width: 100%;
+      max-width: 1380px;
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 2rem;
+      align-items: center;
     }
 
-    .deco-tr {
-      top: -10px;
-      right: -20px;
-      font-size: 140px;
-      transform: rotate(20deg);
-    }
-
-    .deco-bl {
-      bottom: 40px;
-      left: 30px;
-      font-size: 100px;
-      transform: rotate(15deg);
-    }
-
-    .deco-br {
-      bottom: 20px;
-      right: 20px;
-      font-size: 80px;
-    }
-
-    .hero-handwrite {
-      position: absolute;
-      font-family: 'Dancing Script', cursive;
-      font-size: 0.95rem;
-      color: var(--verde);
-      opacity: 0.55;
-      line-height: 2;
-    }
-
-    .hero-handwrite.left {
-      left: 2rem;
-      top: 50%;
-      transform: translateY(-50%) rotate(-4deg);
+    .hero-copy {
+      max-width: 620px;
       text-align: left;
-    }
-
-    .hero-handwrite.right {
-      right: 2rem;
-      top: 40%;
-      transform: translateY(-50%) rotate(3deg);
-      text-align: right;
-    }
-
-    .hero-centro {
       position: relative;
       z-index: 2;
-      max-width: 1100px;
     }
 
     .hero-sup {
-      font-size: 0.75rem;
-      letter-spacing: 0.35em;
-      color: var(--cafe-claro);
+      font-size: 0.7rem;
+      letter-spacing: 0.42em;
       text-transform: uppercase;
-      margin-bottom: 0.5rem;
+      color: var(--cafe-claro);
+      margin-bottom: 0.7rem;
     }
 
-    .hero-titulo-wrap {
-      position: relative;
-      display: inline-block;
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.42rem 0.9rem;
+      border-radius: 999px;
+      background: var(--verde-claro);
+      color: var(--verde-oscuro);
+      font-size: 0.76rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      box-shadow: 0 10px 24px rgba(122, 171, 120, 0.08);
     }
 
-    .hero-titulo-grande {
+    .hero-title {
+      margin: 0 0 0.2rem;
+      line-height: 0.9;
+    }
+
+    .hero-line {
+      display: block;
       font-family: 'Playfair Display', serif;
-      font-size: clamp(4.5rem, 14vw, 11rem);
       font-weight: 900;
       color: var(--verde);
-      line-height: 0.82;
-      letter-spacing: -0.02em;
-      display: block;
+      letter-spacing: -0.05em;
     }
 
-    .hero-script-overlay {
-      font-family: 'Dancing Script', cursive;
-      font-size: clamp(2.4rem, 7vw, 5rem);
-      color: var(--crema-oscuro);
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      white-space: nowrap;
-      z-index: 3;
-      bottom: -12px;
-      opacity: 0.75;
+    .hero-line-1 {
+      font-size: clamp(4.2rem, 8.8vw, 7.8rem);
+      line-height: 0.88;
     }
 
-    .hero-digital {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(3.2rem, 10vw, 8rem);
-      font-weight: 900;
-      color: var(--verde);
-      line-height: 0.85;
-      letter-spacing: -0.02em;
-      display: block;
+    .hero-line-2 {
+      font-size: clamp(3.2rem, 6.8vw, 5.8rem);
+      line-height: 0.88;
+      margin-left: 0.8rem;
+      margin-top: -0.35rem;
+    }
+
+    .hero-intro {
+      max-width: 35rem;
+      margin-top: 1.1rem;
+      margin-bottom: 1.5rem;
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: var(--cafe-claro);
     }
 
     .hero-nombre {
-      font-size: 0.78rem;
-      letter-spacing: 0.3em;
+      margin-bottom: 0.35rem;
+      font-size: 0.76rem;
+      letter-spacing: 0.26em;
       color: var(--cafe-claro);
       text-transform: uppercase;
-      margin-top: 2rem;
-      margin-bottom: 0.4rem;
     }
 
     .hero-uni {
-      font-size: 0.72rem;
-      letter-spacing: 0.2em;
+      margin-bottom: 1.8rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
       color: var(--cafe-claro);
-      opacity: 0.8;
-      margin-bottom: 2rem;
     }
 
     .hero-btns {
       display: flex;
       gap: 1rem;
-      justify-content: center;
       flex-wrap: wrap;
+      justify-content: flex-start;
+      margin-bottom: 1.2rem;
     }
 
     .btn {
-      padding: 0.75rem 2rem;
+      min-width: 180px;
+      padding: 0.9rem 1.8rem;
       border-radius: 50px;
-      font-size: 0.82rem;
-      font-weight: 500;
+      font-size: 0.78rem;
+      font-weight: 600;
       text-decoration: none;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.08em;
       transition: all 0.2s ease;
       cursor: pointer;
       border: none;
       font-family: 'DM Sans', sans-serif;
       text-transform: uppercase;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transform: translateY(0);
+      box-shadow: var(--sombra-suave);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
     }
 
     .btn-verde {
       background: var(--verde);
       color: white;
+      box-shadow: 0 10px 24px rgba(122, 171, 120, 0.18);
     }
 
     .btn-verde:hover {
@@ -284,6 +290,7 @@
       background: transparent;
       color: var(--cafe);
       border: 1.5px solid var(--cafe);
+      box-shadow: none;
     }
 
     .btn-outline:hover {
@@ -291,9 +298,68 @@
       color: white;
     }
 
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+    }
+
+    .hero-pill {
+      padding: 0.42rem 0.85rem;
+      border-radius: 999px;
+      border: 1px solid rgba(122, 171, 120, 0.35);
+      background: rgba(255,255,255,0.4);
+      color: var(--cafe);
+      font-size: 0.74rem;
+      font-weight: 600;
+      box-shadow: 0 6px 18px rgba(61, 46, 34, 0.04);
+    }
+
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: end;
+    }
+
+    .hero-cutout-wrap {
+      position: relative;
+      width: min(100%, 540px);
+      display: flex;
+      justify-content: center;
+      align-items: end;
+      isolation: isolate;
+    }
+
+    .hero-cutout-wrap::before {
+      content: "";
+      position: absolute;
+      width: 380px;
+      height: 430px;
+      left: 52%;
+      bottom: 60px;
+      transform: translateX(-50%);
+      background: rgba(122, 171, 120, 0.14);
+      border-radius: 44% 56% 52% 48% / 40% 44% 56% 60%;
+      z-index: 0;
+      filter: blur(2px);
+    }
+
+    .hero-cutout {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 470px);
+      max-height: 760px;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 20px 28px rgba(61, 46, 34, 0.16));
+      transform: translateY(18px);
+    }
+
+    /* ===== CINTA ===== */
+
     .cinta-wrapper {
       background: var(--verde);
-      padding: 0.65rem 0;
+      padding: 0.7rem 0;
       overflow: hidden;
       white-space: nowrap;
     }
@@ -305,7 +371,7 @@
 
     .cinta-item {
       font-size: 0.72rem;
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: white;
@@ -322,9 +388,11 @@
       100% { transform: translateX(-50%); }
     }
 
+    /* ===== SECCIONES GENERALES ===== */
+
     .seccion {
-      padding: 5rem 5rem;
-      max-width: 1200px;
+      padding: 5rem 4rem;
+      max-width: 1360px;
       margin: 0 auto;
     }
 
@@ -334,7 +402,7 @@
       text-transform: uppercase;
       color: var(--verde);
       font-weight: 600;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.55rem;
     }
 
     .seccion-titulo {
@@ -343,57 +411,77 @@
       color: var(--cafe);
       margin-bottom: 0.5rem;
       font-style: italic;
+      letter-spacing: -0.02em;
     }
 
     .linea-verde {
-      width: 40px;
+      width: 56px;
       height: 3px;
       background: var(--verde);
-      border-radius: 2px;
-      margin-bottom: 3rem;
+      border-radius: 999px;
+      margin-bottom: 2.2rem;
     }
+
+    /* ===== SOBRE MÍ ===== */
 
     #sobre-mi {
       background: var(--crema);
     }
 
+    #sobre-mi .seccion {
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+
+    #sobre-mi .seccion-titulo {
+      font-size: clamp(2.3rem, 4vw, 3.4rem);
+      line-height: 1.05;
+      margin-bottom: 0.2rem;
+    }
+
     .sobre-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .sobre-texto {
+      max-width: 38rem;
     }
 
     .sobre-texto p {
-      font-size: 0.95rem;
+      font-size: 1rem;
       color: var(--cafe-claro);
-      line-height: 1.9;
+      line-height: 1.95;
       margin-bottom: 1rem;
     }
 
     .sobre-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 1.5rem;
+      gap: 0.6rem;
+      margin-top: 1.2rem;
     }
 
     .tag {
       border: 1.5px solid var(--verde);
       color: var(--verde);
-      font-size: 0.78rem;
-      padding: 0.3rem 1rem;
+      font-size: 0.76rem;
+      padding: 0.38rem 0.9rem;
       border-radius: 50px;
       font-weight: 500;
     }
 
     .sobre-foto img {
       width: 100%;
-      border-radius: 16px;
+      max-height: 780px;
+      border-radius: 22px;
       object-fit: cover;
-      aspect-ratio: 3 / 4;
+      object-position: center top;
       border: 3px solid var(--verde-claro);
       display: block;
+      box-shadow: var(--sombra-suave);
     }
 
     .sobre-foto-placeholder {
@@ -410,9 +498,11 @@
       border: 2px dashed var(--verde);
     }
 
+    /* ===== HABILIDADES ===== */
+
     .habilidades-seccion {
       background: var(--crema-oscuro);
-      padding: 5rem;
+      padding: 5rem 4rem;
     }
 
     .habilidades-grid {
@@ -426,13 +516,14 @@
       border-radius: 16px;
       padding: 1.5rem 1rem;
       text-align: center;
-      border: 1px solid rgba(122,171,120,0.25);
+      border: var(--borde-suave);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: var(--sombra-suave);
     }
 
     .habilidad-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 10px 28px rgba(122,171,120,0.18);
+      box-shadow: var(--sombra-media);
     }
 
     .habilidad-icono {
@@ -460,6 +551,8 @@
       line-height: 1.5;
     }
 
+    /* ===== PROYECTOS ===== */
+
     #proyectos {
       background: var(--crema);
     }
@@ -467,16 +560,35 @@
     .proyectos-lista {
       display: flex;
       flex-direction: column;
-      gap: 4rem;
+      gap: 3.5rem;
     }
 
     .proyecto-item {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: start;
-      padding-bottom: 4rem;
+      grid-template-columns: minmax(320px, 1fr) minmax(360px, 1fr);
+      gap: 4rem;
+      align-items: center;
+      padding: 2rem 0 5rem;
       border-bottom: 1px dashed var(--crema-oscuro);
+      position: relative;
+    }
+
+    .proyecto-item::before {
+      content: "";
+      position: absolute;
+      inset: 0 -1.5rem 2rem -1.5rem;
+      background: rgba(255, 255, 255, 0.42);
+      border: var(--borde-suave);
+      border-radius: 28px;
+      z-index: -1;
+    }
+
+    .proyecto-item:nth-child(even) > :first-child {
+      order: 2;
+    }
+
+    .proyecto-item:nth-child(even) > :last-child {
+      order: 1;
     }
 
     .proyecto-item:last-child {
@@ -485,11 +597,11 @@
     }
 
     .proyecto-num {
-      font-size: 4rem;
+      font-size: clamp(4rem, 8vw, 5.5rem);
       font-weight: 900;
       color: rgba(122,171,120,0.12);
       line-height: 1;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.5rem;
     }
 
     .proyecto-label {
@@ -498,45 +610,62 @@
       text-transform: uppercase;
       color: var(--verde);
       font-weight: 600;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.6rem;
     }
 
     .proyecto-titulo {
       font-family: 'Playfair Display', serif;
-      font-size: 1.35rem;
+      font-size: 1.9rem;
       color: var(--cafe);
-      margin-bottom: 0.8rem;
+      margin-bottom: 1rem;
       font-style: italic;
+      line-height: 1.15;
+      max-width: 18ch;
     }
 
     .proyecto-desc {
-      font-size: 0.88rem;
+      font-size: 0.98rem;
       color: var(--cafe-claro);
-      line-height: 1.8;
+      line-height: 1.9;
       margin-bottom: 1rem;
+      max-width: 34rem;
     }
 
     .proyecto-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.4rem;
+      gap: 0.55rem;
+      margin-top: 1rem;
     }
 
     .proyecto-tag {
       background: var(--verde);
       color: white;
-      font-size: 0.72rem;
-      padding: 0.28rem 0.8rem;
+      font-size: 0.74rem;
+      padding: 0.38rem 0.9rem;
       border-radius: 50px;
+    }
+
+    .tesis-box,
+    .rrss-carousel,
+    .codigo-img-card {
+      box-shadow: var(--sombra-suave);
+      border-radius: 24px;
+      border: var(--borde-suave);
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(8px);
+    }
+
+    .tesis-box:hover,
+    .rrss-carousel:hover,
+    .codigo-img-card:hover {
+      box-shadow: var(--sombra-media);
     }
 
     .tesis-box {
       height: 420px;
-      border-radius: 12px;
       overflow: hidden;
-      border: 1px solid var(--crema-oscuro);
       border-left: 4px solid var(--verde);
-      background: white;
     }
 
     .tesis-box iframe {
@@ -545,32 +674,169 @@
       border: none;
     }
 
-    .video-wrapper {
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid var(--crema-oscuro);
-      background: #111;
-      aspect-ratio: 16 / 9;
-    }
+    /* ===== PROYECTO 02 ===== */
 
-    .video-wrapper video {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-
-    .rrss-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+    .codigo-preview-wrap {
+      display: flex;
+      flex-direction: column;
       gap: 1rem;
     }
 
-    .reel-video {
-      border-radius: 12px;
+    .codigo-img-card {
+      display: block;
       overflow: hidden;
-      border: 1px solid var(--crema-oscuro);
+      background: #1e1e1e;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .codigo-img-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 22px 42px rgba(61, 46, 34, 0.14);
+    }
+
+    .codigo-img-card img {
+      width: 100%;
+      display: block;
+    }
+
+    .codigo-img-boton {
+      padding: 0;
+      cursor: zoom-in;
+      border: none;
+      width: 100%;
+      text-align: left;
+    }
+
+    .codigo-caption {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--cafe-claro);
+      margin: 0;
+    }
+
+    .codigo-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .codigo-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.72rem 1.1rem;
+      border-radius: 999px;
+      background: var(--verde);
+      color: white;
+      text-decoration: none;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: background 0.2s ease, transform 0.2s ease;
+      border: none;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .codigo-link:hover {
+      background: var(--verde-oscuro);
+      transform: translateY(-1px);
+    }
+
+    .codigo-link-secundario {
+      background: transparent;
+      color: var(--cafe);
+      border: 1.5px solid var(--cafe);
+      cursor: default;
+      opacity: 0.8;
+    }
+
+    /* ===== LIGHTBOX ===== */
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.82);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      z-index: 3000;
+    }
+
+    .lightbox.abierto {
+      display: flex;
+    }
+
+    .lightbox-contenido {
+      position: relative;
+      max-width: min(1000px, 92vw);
+      max-height: 90vh;
+    }
+
+    .lightbox-contenido img {
+      display: block;
+      max-width: 100%;
+      max-height: 90vh;
+      border-radius: 18px;
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
+    }
+
+    .lightbox-cerrar {
+      position: absolute;
+      top: -14px;
+      right: -14px;
+      width: 38px;
+      height: 38px;
+      border: none;
+      border-radius: 50%;
+      background: white;
+      color: var(--cafe);
+      font-size: 1.5rem;
+      line-height: 1;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* ===== CARRUSEL REELS ===== */
+
+    .rrss-carousel {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .carousel-viewport {
+      width: 100%;
+      overflow: hidden;
+      border-radius: 20px;
+    }
+
+    .carousel-track {
+      display: flex;
+      width: 100%;
+      transition: transform 0.35s ease;
+    }
+
+    .carousel-slide {
+      flex: 0 0 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 0 1.2rem;
+    }
+
+    .reel-video {
+      width: 100%;
+      max-width: 320px;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(122, 171, 120, 0.12);
       background: #111;
       aspect-ratio: 9 / 16;
+      box-shadow: 0 14px 28px rgba(61, 46, 34, 0.12);
     }
 
     .reel-video video {
@@ -580,28 +846,88 @@
       display: block;
     }
 
+    .carousel-btn {
+      position: absolute;
+      top: 45%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.96);
+      color: var(--cafe);
+      box-shadow: 0 8px 18px rgba(61, 46, 34, 0.12);
+      font-size: 1.45rem;
+      cursor: pointer;
+      z-index: 3;
+      transition: all 0.2s ease;
+    }
+
+    .carousel-btn:hover {
+      background: var(--verde);
+      color: white;
+      transform: translateY(-50%) scale(1.05);
+    }
+
+    .carousel-btn.prev {
+      left: 6px;
+    }
+
+    .carousel-btn.next {
+      right: 6px;
+    }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.2rem;
+    }
+
+    .dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(122, 171, 120, 0.35);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .dot.activo {
+      background: var(--verde);
+      transform: scale(1.08);
+    }
+
+    /* ===== PUBLICACIONES ===== */
+
     .publicaciones-seccion {
       background: var(--crema-oscuro);
-      padding: 5rem;
+      padding: 5rem 4rem;
     }
 
     .pub-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 2rem;
+      gap: 2.2rem;
     }
 
     .pub-card {
       background: var(--crema);
-      border-radius: 16px;
-      padding: 2rem;
-      border: 1px solid rgba(122,171,120,0.2);
+      border-radius: 18px;
+      padding: 2.1rem;
+      border: var(--borde-suave);
       border-top: 4px solid var(--verde);
       transition: transform 0.2s ease;
+      box-shadow: var(--sombra-suave);
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
     }
 
     .pub-card:hover {
       transform: translateY(-4px);
+      box-shadow: var(--sombra-media);
     }
 
     .pub-meta {
@@ -615,10 +941,11 @@
 
     .pub-card h3 {
       font-family: 'Playfair Display', serif;
-      font-size: 1.05rem;
+      font-size: 1.2rem;
       color: var(--cafe);
       margin-bottom: 0.8rem;
       font-style: italic;
+      line-height: 1.35;
     }
 
     .pub-card p {
@@ -626,6 +953,7 @@
       color: var(--cafe-claro);
       line-height: 1.7;
       margin-bottom: 1.2rem;
+      flex-grow: 1;
     }
 
     .pub-link {
@@ -639,24 +967,39 @@
       border-bottom: 1px solid var(--verde);
       padding-bottom: 0.1rem;
       transition: opacity 0.2s ease;
+      width: fit-content;
     }
 
     .pub-link:hover {
       opacity: 0.7;
     }
 
+    /* ===== CONTACTO ===== */
+
     .contacto-seccion {
       background: var(--cafe);
-      padding: 5rem;
+      padding: 5rem 4rem;
     }
 
     .contacto-inner {
-      max-width: 1200px;
+      max-width: 1240px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 4rem;
       align-items: start;
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 30px;
+      padding: 2rem;
+      box-shadow: 0 24px 48px rgba(0,0,0,0.12);
+    }
+
+    .contacto-inner > div:last-child {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      padding: 1.4rem;
     }
 
     .contacto-left .seccion-label {
@@ -686,10 +1029,11 @@
       gap: 1rem;
       text-decoration: none;
       padding: 0.8rem 1.2rem;
-      border-radius: 10px;
+      border-radius: 14px;
       border: 1px solid rgba(255,255,255,0.1);
       transition: all 0.2s ease;
       color: white;
+      backdrop-filter: blur(4px);
     }
 
     .contacto-red:hover {
@@ -734,18 +1078,33 @@
       gap: 0.9rem;
     }
 
+    .form-fila {
+      display: flex;
+      gap: 0.8rem;
+    }
+
+    .form-fila > * {
+      flex: 1;
+    }
+
     .form-contacto input,
     .form-contacto textarea {
       width: 100%;
       padding: 0.9rem 1.2rem;
       background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 10px;
+      border-radius: 14px;
       color: white;
       font-size: 0.88rem;
       font-family: 'DM Sans', sans-serif;
       outline: none;
       transition: border-color 0.2s ease;
+      backdrop-filter: blur(6px);
+    }
+
+    .form-contacto input:hover,
+    .form-contacto textarea:hover {
+      border-color: rgba(122,171,120,0.45);
     }
 
     .form-contacto input::placeholder,
@@ -761,6 +1120,46 @@
     .form-contacto textarea {
       min-height: 120px;
       resize: vertical;
+    }
+
+    .form-contacto input.error,
+    .form-contacto textarea.error {
+      border-color: #ffb4b4;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .form-contacto .btn[disabled] {
+      opacity: 0.7;
+      cursor: wait;
+    }
+
+    .form-estado {
+      margin-top: 0.8rem;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.62);
+      min-height: 1.2rem;
+    }
+
+    .form-alt {
+      margin-top: 1rem;
+      padding: 0.9rem 1rem;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .form-alt p {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.62);
+      line-height: 1.6;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-alt a {
+      color: white;
+      text-decoration: none;
+      border-bottom: 1px solid var(--verde);
+      padding-bottom: 0.1rem;
     }
 
     .form-exito,
@@ -784,6 +1183,8 @@
       border: 1px solid rgba(255,255,255,0.2);
     }
 
+    /* ===== CHAT ===== */
+
     .chat-boton {
       position: fixed;
       bottom: 2rem;
@@ -802,10 +1203,20 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      animation: brilloChat 2.6s ease-in-out infinite;
     }
 
     .chat-boton:hover {
       transform: scale(1.08);
+    }
+
+    @keyframes brilloChat {
+      0%, 100% {
+        box-shadow: 0 4px 18px rgba(122,171,120,0.35);
+      }
+      50% {
+        box-shadow: 0 10px 28px rgba(122,171,120,0.58);
+      }
     }
 
     .chat-ventana {
@@ -821,6 +1232,7 @@
       flex-direction: column;
       overflow: hidden;
       border: 0.5px solid var(--crema-oscuro);
+      backdrop-filter: blur(12px);
     }
 
     .chat-ventana.abierto {
@@ -833,7 +1245,29 @@
       color: white;
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 0.8rem;
+    }
+
+    .chat-header-main {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .chat-cerrar {
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 1.1rem;
+      cursor: pointer;
+      opacity: 0.85;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .chat-cerrar:hover {
+      opacity: 1;
+      transform: scale(1.08);
     }
 
     .chat-avatar {
@@ -867,6 +1301,19 @@
       gap: 0.7rem;
     }
 
+    .chat-mensajes::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .chat-mensajes::-webkit-scrollbar-thumb {
+      background: rgba(122,171,120,0.35);
+      border-radius: 999px;
+    }
+
+    .chat-mensajes::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
     .chat-burbuja {
       max-width: 85%;
       padding: 0.65rem 0.95rem;
@@ -876,11 +1323,17 @@
       white-space: pre-line;
     }
 
+    .chat-burbuja a {
+      color: inherit;
+      text-decoration: underline;
+    }
+
     .chat-burbuja.sofia {
       background: var(--verde-claro);
       color: var(--cafe);
       align-self: flex-start;
       border-bottom-left-radius: 4px;
+      box-shadow: 0 8px 18px rgba(122,171,120,0.10);
     }
 
     .chat-burbuja.usuario {
@@ -888,6 +1341,7 @@
       color: white;
       align-self: flex-end;
       border-bottom-right-radius: 4px;
+      box-shadow: 0 8px 18px rgba(61,46,34,0.10);
     }
 
     .chat-cargando {
@@ -941,6 +1395,67 @@
       background: var(--verde-oscuro);
     }
 
+    .chat-sugerencias {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      padding: 0 1rem 0.9rem;
+      border-top: 1px solid var(--crema-oscuro);
+      background: white;
+    }
+
+    .chat-chip {
+      border: 1px solid rgba(122,171,120,0.28);
+      background: var(--verde-claro);
+      color: var(--cafe);
+      border-radius: 999px;
+      padding: 0.45rem 0.75rem;
+      font-size: 0.72rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .chat-chip:hover {
+      background: var(--verde);
+      color: white;
+      border-color: var(--verde);
+    }
+
+    .chat-acciones {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: 0.45rem;
+      max-width: 85%;
+    }
+
+    .chat-acciones.sofia {
+      align-self: flex-start;
+    }
+
+    .chat-accion-btn {
+      border: 1px solid rgba(122,171,120,0.28);
+      background: white;
+      color: var(--cafe);
+      border-radius: 999px;
+      padding: 0.48rem 0.8rem;
+      font-size: 0.72rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'DM Sans', sans-serif;
+      box-shadow: 0 6px 14px rgba(61,46,34,0.06);
+    }
+
+    .chat-accion-btn:hover {
+      background: var(--verde);
+      color: white;
+      border-color: var(--verde);
+      transform: translateY(-1px);
+    }
+
+    /* ===== FOOTER ===== */
+
     footer {
       background: #2a1e12;
       padding: 1.4rem 4rem;
@@ -949,6 +1464,7 @@
       align-items: center;
       gap: 1rem;
       flex-wrap: wrap;
+      border-top: 1px solid rgba(255,255,255,0.06);
     }
 
     footer p {
@@ -957,10 +1473,68 @@
       letter-spacing: 0.1em;
     }
 
-    @media (max-width: 900px) {
-      nav {
-        padding: 1rem 1.5rem;
-        flex-direction: column;
+    footer p:last-child {
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* ===== REVEAL ===== */
+
+    .reveal-item {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== RESPONSIVE ===== */
+
+    @media (max-width: 980px) {
+      .hero {
+        min-height: auto;
+        padding: 2.5rem 1.5rem 3rem;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 2.2rem;
+      }
+
+      .hero-copy {
+        max-width: 100%;
+        text-align: center;
+      }
+
+      .hero-line-2 {
+        margin-left: 0;
+      }
+
+      .hero-intro {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-btns,
+      .hero-pills {
+        justify-content: center;
+      }
+
+      .hero-cutout-wrap {
+        width: min(100%, 360px);
+      }
+
+      .hero-cutout-wrap::before {
+        width: 260px;
+        height: 300px;
+        bottom: 40px;
+      }
+
+      .hero-cutout {
+        width: min(100%, 320px);
+        transform: translateY(8px);
       }
 
       .seccion,
@@ -981,12 +1555,54 @@
         grid-template-columns: repeat(2, 1fr);
       }
 
-      .hero-handwrite {
-        display: none;
+      .proyecto-desc {
+        max-width: 100%;
+      }
+
+      .sobre-grid {
+        gap: 2rem;
+      }
+
+      .sobre-foto img {
+        max-height: none;
+      }
+
+      .rrss-carousel {
+        max-width: 420px;
+      }
+
+      .reel-video {
+        max-width: 280px;
+      }
+
+      .carousel-btn.prev {
+        left: 0;
+      }
+
+      .carousel-btn.next {
+        right: 0;
+      }
+
+      .proyecto-item::before {
+        inset: 0 -0.6rem 1.5rem -0.6rem;
+      }
+
+      .proyecto-item:nth-child(even) > :first-child,
+      .proyecto-item:nth-child(even) > :last-child {
+        order: initial;
+      }
+
+      .contacto-inner {
+        padding: 1.4rem;
+        border-radius: 24px;
       }
     }
 
     @media (max-width: 600px) {
+      nav {
+        padding: 1rem 1.2rem;
+      }
+
       .nav-links {
         gap: 0.8rem;
       }
@@ -995,9 +1611,38 @@
         font-size: 0.7rem;
       }
 
+      .hero-line-1 {
+        font-size: clamp(3rem, 14vw, 4.8rem);
+      }
+
+      .hero-line-2 {
+        font-size: clamp(2.4rem, 11vw, 3.8rem);
+      }
+
+      .hero-intro {
+        font-size: 0.95rem;
+      }
+
+      .hero-badge {
+        font-size: 0.72rem;
+      }
+
+      .btn {
+        min-width: 155px;
+        padding: 0.85rem 1.3rem;
+      }
+
       .habilidades-grid,
-      .rrss-grid {
+      .pub-grid {
         grid-template-columns: 1fr;
+      }
+
+      .rrss-carousel {
+        max-width: 330px;
+      }
+
+      .reel-video {
+        max-width: 240px;
       }
 
       .chat-ventana {
@@ -1011,16 +1656,27 @@
         bottom: 1rem;
       }
 
-      .hero-titulo-grande {
-        font-size: clamp(3.5rem, 16vw, 6rem);
+      .form-fila {
+        flex-direction: column;
+        gap: 0.9rem;
       }
 
-      .hero-digital {
-        font-size: clamp(2.8rem, 12vw, 4.5rem);
+      .chat-sugerencias {
+        padding-bottom: 0.8rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
       }
 
-      .hero-script-overlay {
-        bottom: -4px;
+      .reveal-item,
+      .btn,
+      .chat-boton,
+      .cinta-track {
+        animation: none !important;
+        transition: none !important;
       }
     }
   </style>
@@ -1043,45 +1699,53 @@
   </nav>
 
   <section class="hero">
-    <div class="deco deco-tl">🌿</div>
-    <div class="deco deco-tr">🍃</div>
-    <div class="deco deco-bl">🌱</div>
-    <div class="deco deco-br">🦋</div>
-
-    <div class="hero-handwrite left"
-      data-es="periodismo · datos · narrativa&#10;comunicación digital&#10;historias que importan"
-      data-en="journalism · data · narrative&#10;digital communication&#10;stories that matter">
-      periodismo · datos · narrativa<br>
-      comunicación digital<br>
-      historias que importan
-    </div>
-
-    <div class="hero-handwrite right"
-      data-es="python · vs code · ia&#10;minería de texto&#10;APIs · audiovisual"
-      data-en="python · vs code · ai&#10;text mining&#10;APIs · audiovisual">
-      python · vs code · ia<br>
-      minería de texto<br>
-      APIs · audiovisual
-    </div>
-
-    <div class="hero-centro">
-      <p class="hero-sup" data-es="portafolio profesional" data-en="professional portfolio">portafolio profesional</p>
-
-      <div class="hero-titulo-wrap">
-        <span class="hero-titulo-grande">PERIODISTA</span>
-        <span class="hero-script-overlay" data-es="& portafolio" data-en="& portfolio">& portafolio</span>
+    <div class="hero-grid">
+      <div class="hero-visual">
+        <div class="hero-cutout-wrap">
+          <img src="./images/hero-sofia.png" alt="Sofia Vyhmeister" class="hero-cutout">
+        </div>
       </div>
 
-      <span class="hero-digital">DIGITAL</span>
+      <div class="hero-copy">
+        <p class="hero-sup" data-es="portafolio profesional" data-en="professional portfolio">
+          portafolio profesional
+        </p>
 
-      <p class="hero-nombre">Sofia Vyhmeister Fuentes</p>
-      <p class="hero-uni" data-es="Universidad del Desarrollo · Concepción, Chile" data-en="Universidad del Desarrollo · Concepción, Chile">
-        Universidad del Desarrollo · Concepción, Chile
-      </p>
+        <div class="hero-badge">
+          <span data-es="Periodismo + contenido + tecnología" data-en="Journalism + content + technology">
+            Periodismo + contenido + tecnología
+          </span>
+        </div>
 
-      <div class="hero-btns">
-        <a href="#proyectos" class="btn btn-verde" data-es="Ver proyectos" data-en="View projects">Ver proyectos</a>
-        <a href="#contacto" class="btn btn-outline" data-es="Contactarme" data-en="Contact me">Contactarme</a>
+        <h1 class="hero-title">
+          <span class="hero-line hero-line-1">PERIODISTA</span>
+          <span class="hero-line hero-line-2">DIGITAL</span>
+        </h1>
+
+        <p class="hero-intro"
+           data-es="Estudiante de periodismo con perfil creativo y técnico. Desarrollo contenido, analizo información y construyo proyectos con narrativa, datos e IA."
+           data-en="Journalism student with a creative and technical profile. I develop content, analyze information, and build projects through storytelling, data, and AI.">
+          Estudiante de periodismo con perfil creativo y técnico. Desarrollo contenido, analizo información y construyo proyectos con narrativa, datos e IA.
+        </p>
+
+        <p class="hero-nombre">SOFIA VYHMEISTER FUENTES</p>
+        <p class="hero-uni"
+           data-es="Universidad del Desarrollo · Concepción, Chile"
+           data-en="Universidad del Desarrollo · Concepción, Chile">
+          Universidad del Desarrollo · Concepción, Chile
+        </p>
+
+        <div class="hero-btns">
+          <a href="#proyectos" class="btn btn-verde" data-es="Ver proyectos" data-en="View projects">Ver proyectos</a>
+          <a href="#contacto" class="btn btn-outline" data-es="Contactarme" data-en="Contact me">Contactarme</a>
+        </div>
+
+        <div class="hero-pills">
+          <span class="hero-pill" data-es="RRSS" data-en="Social Media">RRSS</span>
+          <span class="hero-pill" data-es="Python" data-en="Python">Python</span>
+          <span class="hero-pill" data-es="Audiovisual" data-en="Audiovisual">Audiovisual</span>
+          <span class="hero-pill" data-es="IA" data-en="AI">IA</span>
+        </div>
       </div>
     </div>
   </section>
@@ -1241,9 +1905,43 @@
               Herramienta construida en VS Code con integración de API Key para seleccionar, clasificar, calificar y resumir noticias automáticamente.
             </p>
 
-            <div class="video-wrapper" style="display:flex; align-items:center; justify-content:center; color:white; padding:2rem; text-align:center;">
-              <p>Video del analizador disponible próximamente.</p>
+            <div class="proyecto-tags">
+              <span class="proyecto-tag">API Keys</span>
+              <span class="proyecto-tag">IA</span>
+              <span class="proyecto-tag">Python</span>
             </div>
+          </div>
+
+          <div class="codigo-preview-wrap">
+            <button type="button"
+                    class="codigo-img-card codigo-img-boton"
+                    onclick="abrirLightbox('./images/analizador-codigo.png', 'Código real del analizador de noticias en Python')">
+              <img src="./images/analizador-codigo.png" alt="Código real del analizador de noticias en Python">
+            </button>
+
+            <p class="codigo-caption"
+               data-es="Proyecto independiente desarrollado en Python desde VS Code, con integración de APIs para clasificación y resumen automatizado de noticias."
+               data-en="Independent project developed in Python from VS Code, with API integration for automated news classification and summarization.">
+              Proyecto independiente desarrollado en Python desde VS Code, con integración de APIs para clasificación y resumen automatizado de noticias.
+            </p>
+
+            <div class="codigo-links">
+              <button type="button"
+                      class="codigo-link"
+                      onclick="abrirLightbox('./images/analizador-codigo.png', 'Código real del analizador de noticias en Python')"
+                      data-es="Ver imagen en grande"
+                      data-en="View full image">
+                Ver imagen en grande
+              </button>
+
+              <span class="codigo-link codigo-link-secundario"
+                    data-es="Código disponible a solicitud"
+                    data-en="Code available upon request">
+                Código disponible a solicitud
+              </span>
+            </div>
+          </div>
+        </div>
 
         <div class="proyecto-item">
           <div>
@@ -1263,19 +1961,36 @@
             </div>
           </div>
 
-          <div class="rrss-grid">
-            <div class="reel-video">
-              <video controls preload="metadata" playsinline>
-                <source src="./videos/reel1.mp4" type="video/mp4">
-                Tu navegador no soporta video HTML5.
-              </video>
+          <div class="rrss-carousel" id="rrssCarousel">
+            <button class="carousel-btn prev" type="button" onclick="moverCarrusel(-1)">‹</button>
+
+            <div class="carousel-viewport">
+              <div class="carousel-track" id="carouselTrack">
+                <div class="carousel-slide">
+                  <div class="reel-video">
+                    <video controls preload="metadata" playsinline muted loop>
+                      <source src="./videos/reel1.mp4" type="video/mp4">
+                      Tu navegador no soporta video HTML5.
+                    </video>
+                  </div>
+                </div>
+
+                <div class="carousel-slide">
+                  <div class="reel-video">
+                    <video controls preload="metadata" playsinline muted loop>
+                      <source src="./videos/reel2.mp4" type="video/mp4">
+                      Tu navegador no soporta video HTML5.
+                    </video>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div class="reel-video">
-              <video controls preload="metadata" playsinline>
-                <source src="./videos/reel2.mp4" type="video/mp4">
-                Tu navegador no soporta video HTML5.
-              </video>
+            <button class="carousel-btn next" type="button" onclick="moverCarrusel(1)">›</button>
+
+            <div class="carousel-dots">
+              <button class="dot activo" type="button" onclick="irASlide(0)"></button>
+              <button class="dot" type="button" onclick="irASlide(1)"></button>
             </div>
           </div>
         </div>
@@ -1378,31 +2093,49 @@
         <span class="form-label" data-es="o escríbeme directamente" data-en="or write to me directly">o escríbeme directamente</span>
 
         <form class="form-contacto"
-              action="https://formspree.io/f/TU_CODIGO"
+              action="https://formspree.io/f/xvzvdnld"
               method="POST"
               onsubmit="formularioEnviado(event)">
-          <input type="text"
-                 name="nombre"
-                 required
-                 placeholder="Tu nombre"
-                 data-placeholder-es="Tu nombre"
-                 data-placeholder-en="Your name">
 
-          <input type="email"
-                 name="email"
-                 required
-                 placeholder="Tu email"
-                 data-placeholder-es="Tu email"
-                 data-placeholder-en="Your email">
+          <div class="form-fila">
+            <input type="text"
+                   name="nombre"
+                   id="nombre"
+                   required
+                   placeholder="Tu nombre"
+                   data-placeholder-es="Tu nombre"
+                   data-placeholder-en="Your name">
+
+            <input type="email"
+                   name="email"
+                   id="email"
+                   required
+                   placeholder="Tu email"
+                   data-placeholder-es="Tu email"
+                   data-placeholder-en="Your email">
+          </div>
 
           <textarea name="mensaje"
+                    id="mensaje"
                     required
                     placeholder="Tu mensaje..."
                     data-placeholder-es="Tu mensaje..."
                     data-placeholder-en="Your message..."></textarea>
 
-          <button type="submit" class="btn btn-verde" data-es="Enviar mensaje" data-en="Send message">Enviar mensaje</button>
+          <button type="submit" id="submitBtn" class="btn btn-verde" data-es="Enviar mensaje" data-en="Send message">Enviar mensaje</button>
         </form>
+
+        <div class="form-estado" id="formEstado"></div>
+
+        <div class="form-alt">
+          <p data-es="Mientras el formulario se conecta, también puedes escribirme directamente por correo."
+             data-en="While the form is being connected, you can also email me directly.">
+            Mientras el formulario se conecta, también puedes escribirme directamente por correo.
+          </p>
+          <a href="mailto:svyhmeisterf@gmail.com?subject=Contacto%20desde%20portafolio">
+            svyhmeisterf@gmail.com
+          </a>
+        </div>
 
         <div class="form-exito" id="formExito">
           ✅ <span data-es="¡Mensaje enviado! Te responderé pronto." data-en="Message sent! I will get back to you soon.">¡Mensaje enviado! Te responderé pronto.</span>
@@ -1419,7 +2152,7 @@
   </div>
 
   <footer>
-    <p>© 2025 Sofia Vyhmeister Fuentes</p>
+    <p>© 2026 Sofia Vyhmeister Fuentes</p>
     <p>svyhmeisterf.github.io</p>
   </footer>
 
@@ -1427,16 +2160,23 @@
 
   <div class="chat-ventana" id="chatVentana">
     <div class="chat-header">
-      <div class="chat-avatar">SV</div>
-      <div class="chat-header-info">
-        <strong>Sofia Vyhmeister</strong>
-        <span data-es="Periodista Digital · en línea" data-en="Digital Journalist · online">Periodista Digital · en línea</span>
+      <div class="chat-header-main">
+        <div class="chat-avatar">SV</div>
+        <div class="chat-header-info">
+          <strong>Sofia Vyhmeister</strong>
+          <span data-es="Periodista Digital · en línea" data-en="Digital Journalist · online">Periodista Digital · en línea</span>
+        </div>
       </div>
+
+      <button class="chat-cerrar"
+              type="button"
+              aria-label="Cerrar chat"
+              onclick="toggleChat()">×</button>
     </div>
 
     <div class="chat-mensajes" id="chatMensajes">
       <div class="chat-burbuja sofia" id="mensajeInicial">
-        ¡Hola! Soy Sofia 👋 Estudiante de periodismo con perfil técnico. ¿Tienes alguna pregunta sobre mi trabajo?
+        ¡Hola! Soy Sofia 👋 Puedo ayudarte a recorrer mi portafolio, mostrarte mis proyectos y llevarte a la sección que quieras ver.
       </div>
     </div>
 
@@ -1451,36 +2191,431 @@
              onkeypress="if(event.key==='Enter') enviarMensaje()">
       <button class="chat-enviar" onclick="enviarMensaje()" type="button">➤</button>
     </div>
+
+    <div class="chat-sugerencias" id="chatSugerencias">
+      <button class="chat-chip" type="button" onclick="usarSugerencia('sobreMi')" data-es="Sobre mí" data-en="About me">Sobre mí</button>
+      <button class="chat-chip" type="button" onclick="usarSugerencia('tesis')" data-es="Tesis" data-en="Thesis">Tesis</button>
+      <button class="chat-chip" type="button" onclick="usarSugerencia('proyectos')" data-es="Proyectos" data-en="Projects">Proyectos</button>
+      <button class="chat-chip" type="button" onclick="usarSugerencia('rrss')" data-es="RRSS" data-en="Social media">RRSS</button>
+      <button class="chat-chip" type="button" onclick="usarSugerencia('contacto')" data-es="Contacto" data-en="Contact">Contacto</button>
+    </div>
+  </div>
+
+  <div class="lightbox" id="lightbox" onclick="cerrarLightbox(event)">
+    <div class="lightbox-contenido">
+      <button type="button" class="lightbox-cerrar" onclick="cerrarLightbox()">×</button>
+      <img id="lightboxImg" src="" alt="">
+    </div>
   </div>
 
   <script>
     let idiomaActual = 'es';
+    let slideActual = 0;
+    let carruselVisible = false;
+    let ultimoTemaChat = null;
 
     function cambiarIdioma() {
       idiomaActual = idiomaActual === 'es' ? 'en' : 'es';
-
       document.getElementById('idioma-texto').textContent = idiomaActual === 'es' ? 'EN' : 'ES';
 
       document.querySelectorAll('[data-es]').forEach(el => {
         const nuevoTexto = el.getAttribute('data-' + idiomaActual);
-        if (nuevoTexto) {
-          el.textContent = nuevoTexto;
-        }
+        if (nuevoTexto) el.textContent = nuevoTexto;
       });
 
       document.querySelectorAll('[data-placeholder-es]').forEach(el => {
         const nuevoPlaceholder = el.getAttribute('data-placeholder-' + idiomaActual);
-        if (nuevoPlaceholder) {
-          el.placeholder = nuevoPlaceholder;
-        }
+        if (nuevoPlaceholder) el.placeholder = nuevoPlaceholder;
       });
 
       const mensajeInicial = document.getElementById('mensajeInicial');
       if (mensajeInicial) {
         mensajeInicial.textContent = idiomaActual === 'es'
-          ? '¡Hola! Soy Sofia 👋 Estudiante de periodismo con perfil técnico. ¿Tienes alguna pregunta sobre mi trabajo?'
-          : "Hi! I'm Sofia 👋 A journalism student with a technical profile. Do you have any questions about my work?";
+          ? '¡Hola! Soy Sofia 👋 Puedo ayudarte a recorrer mi portafolio, mostrarte mis proyectos y llevarte a la sección que quieras ver.'
+          : "Hi! I'm Sofia 👋 I can help you explore my portfolio, show you my projects, and take you to the section you want to see.";
       }
+
+      const botonCerrarChat = document.querySelector('.chat-cerrar');
+      if (botonCerrarChat) {
+        botonCerrarChat.setAttribute(
+          'aria-label',
+          idiomaActual === 'es' ? 'Cerrar chat' : 'Close chat'
+        );
+      }
+    }
+
+    function toggleChat() {
+      document.getElementById('chatVentana').classList.toggle('abierto');
+    }
+
+    function normalizarTexto(texto) {
+      return texto
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .trim();
+    }
+
+    function agregarMensaje(texto, tipo) {
+      const contenedor = document.getElementById('chatMensajes');
+      const burbuja = document.createElement('div');
+      burbuja.className = 'chat-burbuja ' + tipo;
+      burbuja.textContent = texto;
+      contenedor.appendChild(burbuja);
+      contenedor.scrollTop = contenedor.scrollHeight;
+    }
+
+    function agregarAccionesChat(acciones = []) {
+      if (!acciones.length) return;
+
+      const contenedor = document.getElementById('chatMensajes');
+      const wrap = document.createElement('div');
+      wrap.className = 'chat-acciones sofia';
+
+      acciones.forEach(accion => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'chat-accion-btn';
+        btn.textContent = idiomaActual === 'es' ? accion.labelEs : accion.labelEn;
+
+        btn.addEventListener('click', () => {
+          if (accion.tipo === 'scroll') {
+            scrollASeccion(accion.target);
+          }
+
+          if (accion.tipo === 'mensaje') {
+            agregarMensaje(
+              idiomaActual === 'es' ? accion.userTextEs : accion.userTextEn,
+              'usuario'
+            );
+
+            const cargando = document.getElementById('chatCargando');
+            cargando.style.display = 'block';
+
+            setTimeout(() => {
+              cargando.style.display = 'none';
+              responderBot(idiomaActual === 'es' ? accion.userTextEs : accion.userTextEn);
+            }, 350);
+          }
+
+          if (accion.tipo === 'link' && accion.target) {
+            if (accion.target.startsWith('mailto:')) {
+              window.location.href = accion.target;
+            } else {
+              window.open(accion.target, '_blank', 'noopener,noreferrer');
+            }
+          }
+        });
+
+        wrap.appendChild(btn);
+      });
+
+      contenedor.appendChild(wrap);
+      contenedor.scrollTop = contenedor.scrollHeight;
+    }
+
+    function scrollASeccion(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      setTimeout(() => {
+        document.getElementById('chatVentana').classList.remove('abierto');
+      }, 500);
+    }
+
+    function detectarIntencion(texto) {
+      const t = normalizarTexto(texto);
+
+      if (/hola|hi|hello|buenas/.test(t)) return 'saludo';
+      if (/sobre ti|sobre mi|about you|about me|quien eres|who are you|perfil/.test(t)) return 'sobreMi';
+      if (/tesis|thesis|eufem/.test(t)) return 'tesis';
+      if (/proyecto|project|trabajo|work|portfolio|portafolio/.test(t)) return 'proyectos';
+      if (/habilidad|skill|python|excel|word|vs code|metricas|metrics/.test(t)) return 'habilidades';
+      if (/experiencia|experience|revista nos|publicaciones|publications|prensa/.test(t)) return 'experiencia';
+      if (/rrss|reels|instagram|tiktok|social media|contenido/.test(t)) return 'rrss';
+      if (/ia|ai|api|analizador|analyzer|noticias|news/.test(t)) return 'ia';
+      if (/contacto|contact|correo|email|linkedin|whatsapp/.test(t)) return 'contacto';
+      if (/verlo|mostrar|muestrame|show me|go there|llevame|ir ahi|quiero verlo/.test(t)) return 'seguirTema';
+      return 'default';
+    }
+
+    function construirRespuesta(intencion) {
+      const respuestas = {
+        es: {
+          saludo: {
+            texto: "¡Hola! Soy Sofia. Este chat puede orientarte dentro de mi portafolio: puedes conocer mi perfil, revisar mis proyectos, ver mi trabajo en RRSS o ir directo a contacto.",
+            acciones: [
+              { tipo: 'scroll', target: 'sobre-mi', labelEs: 'Ver perfil', labelEn: 'View profile' },
+              { tipo: 'scroll', target: 'proyectos', labelEs: 'Ver proyectos', labelEn: 'View projects' },
+              { tipo: 'scroll', target: 'contacto', labelEs: 'Ir a contacto', labelEn: 'Go to contact' }
+            ]
+          },
+          sobreMi: {
+            texto: "Soy estudiante de periodismo con un perfil que cruza contenido, análisis y herramientas digitales. Mi foco está en comunicaciones corporativas, periodismo de datos, contenido estratégico y proyectos con base tecnológica.",
+            acciones: [
+              { tipo: 'scroll', target: 'sobre-mi', labelEs: 'Abrir Sobre mí', labelEn: 'Open About me' },
+              { tipo: 'mensaje', labelEs: '¿Qué habilidades tienes?', labelEn: 'What are your skills?', userTextEs: '¿Qué habilidades tienes?', userTextEn: 'What are your skills?' }
+            ]
+          },
+          tesis: {
+            texto: "Mi tesis analizó el uso de eufemismos en la televisión chilena combinando análisis manual y minería de texto en Python. Es uno de mis proyectos más representativos porque conecta periodismo, metodología y análisis de datos.",
+            acciones: [
+              { tipo: 'scroll', target: 'proyectos', labelEs: 'Ver proyecto de tesis', labelEn: 'View thesis project' },
+              { tipo: 'mensaje', labelEs: '¿Qué herramientas usaste?', labelEn: 'What tools did you use?', userTextEs: '¿Qué herramientas usaste?', userTextEn: 'What tools did you use?' }
+            ]
+          },
+          proyectos: {
+            texto: "En mi portafolio destaco tres líneas principales: investigación en periodismo de datos, una herramienta propia para analizar noticias con IA y contenido estratégico para redes sociales.",
+            acciones: [
+              { tipo: 'scroll', target: 'proyectos', labelEs: 'Ir a proyectos', labelEn: 'Go to projects' },
+              { tipo: 'mensaje', labelEs: 'Muéstrame RRSS', labelEn: 'Show me social media', userTextEs: 'Muéstrame RRSS', userTextEn: 'Show me social media' }
+            ]
+          },
+          habilidades: {
+            texto: "Trabajo con redacción periodística, gestión de RRSS, análisis de métricas, producción audiovisual, Python, VS Code, minería de texto, uso de APIs de IA, Excel y Word.",
+            acciones: [
+              { tipo: 'scroll', target: 'habilidades', labelEs: 'Ver habilidades', labelEn: 'View skills' },
+              { tipo: 'mensaje', labelEs: 'Ver proyectos', labelEn: 'View projects', userTextEs: 'Quiero ver tus proyectos', userTextEn: 'I want to see your projects' }
+            ]
+          },
+          experiencia: {
+            texto: "Tengo experiencia en redacción, cobertura y creación de contenido, incluyendo publicaciones en Revista NOS y proyectos con enfoque institucional y audiovisual.",
+            acciones: [
+              { tipo: 'scroll', target: 'publicaciones', labelEs: 'Ver publicaciones', labelEn: 'View publications' },
+              { tipo: 'scroll', target: 'proyectos', labelEs: 'Ver proyectos', labelEn: 'View projects' }
+            ]
+          },
+          rrss: {
+            texto: "En contenido para RRSS trabajo con planificación editorial, reels, estrategia de difusión y revisión de métricas para crecimiento orgánico. En el portafolio puedes ver ejemplos en video.",
+            acciones: [
+              { tipo: 'scroll', target: 'proyectos', labelEs: 'Ver reels', labelEn: 'View reels' },
+              { tipo: 'mensaje', labelEs: '¿Qué herramientas usas?', labelEn: 'What tools do you use?', userTextEs: '¿Qué herramientas usas?', userTextEn: 'What tools do you use?' }
+            ]
+          },
+          ia: {
+            texto: "Desarrollé una herramienta propia en Python desde VS Code para clasificar, evaluar y resumir noticias con apoyo de APIs. Ese proyecto muestra mi perfil técnico aplicado a productos periodísticos.",
+            acciones: [
+              { tipo: 'scroll', target: 'proyectos', labelEs: 'Ver analizador', labelEn: 'View analyzer' },
+              { tipo: 'mensaje', labelEs: 'Cuéntame sobre tu tesis', labelEn: 'Tell me about your thesis', userTextEs: 'Cuéntame sobre tu tesis', userTextEn: 'Tell me about your thesis' }
+            ]
+          },
+          contacto: {
+            texto: "Puedes escribirme por correo, LinkedIn o WhatsApp. También puedes usar el formulario del sitio cuando quede conectado.",
+            acciones: [
+              { tipo: 'scroll', target: 'contacto', labelEs: 'Ir a contacto', labelEn: 'Go to contact' },
+              { tipo: 'link', target: 'mailto:svyhmeisterf@gmail.com', labelEs: 'Abrir correo', labelEn: 'Open email' }
+            ]
+          },
+          default: {
+            texto: "Puedo ayudarte a recorrer el portafolio. Puedes preguntarme por mi perfil, tesis, proyectos, RRSS, habilidades o formas de contacto.",
+            acciones: [
+              { tipo: 'scroll', target: 'sobre-mi', labelEs: 'Ver perfil', labelEn: 'View profile' },
+              { tipo: 'scroll', target: 'proyectos', labelEs: 'Ver proyectos', labelEn: 'View projects' },
+              { tipo: 'scroll', target: 'contacto', labelEs: 'Ir a contacto', labelEn: 'Go to contact' }
+            ]
+          }
+        },
+        en: {
+          saludo: {
+            texto: "Hi! I'm Sofia. This chat can guide you through my portfolio: you can explore my profile, review my projects, see my social media work, or go directly to the contact section.",
+            acciones: [
+              { tipo: 'scroll', target: 'sobre-mi', labelEs: 'Ver perfil', labelEn: 'View profile' },
+              { tipo: 'scroll', target: 'proyectos', labelEs: 'Ver proyectos', labelEn: 'View projects' },
+              { tipo: 'scroll', target: 'contacto', labelEs: 'Ir a contacto', labelEn: 'Go to contact' }
+            ]
+          },
+          sobreMi: {
+            texto: "I am a journalism student with a profile that connects content, analysis, and digital tools. My focus includes corporate communications, data journalism, strategic content, and technology-driven projects.",
+            acciones: [
+              { tipo: 'scroll', target: 'sobre-mi', labelEs: 'Abrir Sobre mí', labelEn: 'Open About me' },
+              { tipo: 'mensaje', labelEs: '¿Qué habilidades tienes?', labelEn: 'What are your skills?', userTextEs: '¿Qué habilidades tienes?', userTextEn: 'What are your skills?' }
+            ]
+          },
+          tesis: {
+            texto: "My thesis analyzed euphemisms in Chilean television by combining manual analysis and Python text mining. It is one of my most representative projects because it connects journalism, methodology, and data analysis.",
+            acciones: [
+              { tipo: 'scroll', target: 'proyectos', labelEs: 'Ver proyecto de tesis', labelEn: 'View thesis project' },
+              { tipo: 'mensaje', labelEs: '¿Qué herramientas usaste?', labelEn: 'What tools did you use?', userTextEs: '¿Qué herramientas usaste?', userTextEn: 'What tools did you use?' }
+            ]
+          },
+          proyectos: {
+            texto: "My portfolio highlights three main areas: data journalism research, a custom AI-based news analysis tool, and strategic social media content.",
+            acciones: [
+              { tipo: 'scroll', target: 'proyectos', labelEs: 'Ir a proyectos', labelEn: 'Go to projects' },
+              { tipo: 'mensaje', labelEs: 'Muéstrame RRSS', labelEn: 'Show me social media', userTextEs: 'Muéstrame RRSS', userTextEn: 'Show me social media' }
+            ]
+          },
+          habilidades: {
+            texto: "My skills include journalistic writing, social media management, metrics analysis, audiovisual production, Python, VS Code, text mining, AI APIs, Excel, and Word.",
+            acciones: [
+              { tipo: 'scroll', target: 'habilidades', labelEs: 'Ver habilidades', labelEn: 'View skills' },
+              { tipo: 'mensaje', labelEs: 'Ver proyectos', labelEn: 'View projects', userTextEs: 'Quiero ver tus proyectos', userTextEn: 'I want to see your projects' }
+            ]
+          },
+          experiencia: {
+            texto: "I have experience in writing, coverage, and content creation, including publications in Revista NOS and projects with institutional and audiovisual focus.",
+            acciones: [
+              { tipo: 'scroll', target: 'publicaciones', labelEs: 'Ver publicaciones', labelEn: 'View publications' },
+              { tipo: 'scroll', target: 'proyectos', labelEs: 'Ver proyectos', labelEn: 'View projects' }
+            ]
+          },
+          rrss: {
+            texto: "In social media content, I work with editorial planning, reels, communication strategy, and metrics review for organic growth. You can see examples in the portfolio.",
+            acciones: [
+              { tipo: 'scroll', target: 'proyectos', labelEs: 'Ver reels', labelEn: 'View reels' },
+              { tipo: 'mensaje', labelEs: '¿Qué herramientas usas?', labelEn: 'What tools do you use?', userTextEs: '¿Qué herramientas usas?', userTextEn: 'What tools do you use?' }
+            ]
+          },
+          ia: {
+            texto: "I developed a custom Python tool in VS Code to classify, evaluate, and summarize news with API support. This project reflects my technical profile applied to journalism products.",
+            acciones: [
+              { tipo: 'scroll', target: 'proyectos', labelEs: 'Ver analizador', labelEn: 'View analyzer' },
+              { tipo: 'mensaje', labelEs: 'Cuéntame sobre tu tesis', labelEn: 'Tell me about your thesis', userTextEs: 'Cuéntame sobre tu tesis', userTextEn: 'Tell me about your thesis' }
+            ]
+          },
+          contacto: {
+            texto: "You can contact me by email, LinkedIn, or WhatsApp. You can also use the site form once it is connected.",
+            acciones: [
+              { tipo: 'scroll', target: 'contacto', labelEs: 'Ir a contacto', labelEn: 'Go to contact' },
+              { tipo: 'link', target: 'mailto:svyhmeisterf@gmail.com', labelEs: 'Abrir correo', labelEn: 'Open email' }
+            ]
+          },
+          default: {
+            texto: "I can help you navigate the portfolio. You can ask about my profile, thesis, projects, social media work, skills, or contact options.",
+            acciones: [
+              { tipo: 'scroll', target: 'sobre-mi', labelEs: 'Ver perfil', labelEn: 'View profile' },
+              { tipo: 'scroll', target: 'proyectos', labelEs: 'Ver proyectos', labelEn: 'View projects' },
+              { tipo: 'scroll', target: 'contacto', labelEs: 'Ir a contacto', labelEn: 'Go to contact' }
+            ]
+          }
+        }
+      };
+
+      return respuestas[idiomaActual][intencion] || respuestas[idiomaActual].default;
+    }
+
+    function resolverSeguimiento() {
+      if (!ultimoTemaChat) {
+        return construirRespuesta('default');
+      }
+
+      const mapa = {
+        sobreMi: { target: 'sobre-mi' },
+        tesis: { target: 'proyectos' },
+        proyectos: { target: 'proyectos' },
+        habilidades: { target: 'habilidades' },
+        experiencia: { target: 'publicaciones' },
+        rrss: { target: 'proyectos' },
+        ia: { target: 'proyectos' },
+        contacto: { target: 'contacto' }
+      };
+
+      const destino = mapa[ultimoTemaChat]?.target || 'proyectos';
+
+      return {
+        texto: idiomaActual === 'es'
+          ? 'Te llevo a esa sección del portafolio.'
+          : 'I can take you to that section of the portfolio.',
+        acciones: [
+          {
+            tipo: 'scroll',
+            target: destino,
+            labelEs: 'Abrir sección',
+            labelEn: 'Open section'
+          }
+        ]
+      };
+    }
+
+    function responderBot(textoUsuario) {
+      const intencion = detectarIntencion(textoUsuario);
+
+      let respuesta;
+
+      if (intencion === 'seguirTema') {
+        respuesta = resolverSeguimiento();
+      } else {
+        respuesta = construirRespuesta(intencion);
+        if (intencion !== 'saludo' && intencion !== 'default') {
+          ultimoTemaChat = intencion;
+        }
+      }
+
+      agregarMensaje(respuesta.texto, 'sofia');
+      agregarAccionesChat(respuesta.acciones);
+    }
+
+    function enviarMensaje() {
+      const input = document.getElementById('chatInput');
+      const texto = input.value.trim();
+      if (!texto) return;
+
+      agregarMensaje(texto, 'usuario');
+      input.value = '';
+
+      const cargando = document.getElementById('chatCargando');
+      cargando.style.display = 'block';
+
+      setTimeout(() => {
+        cargando.style.display = 'none';
+        responderBot(texto);
+      }, 420);
+    }
+
+    function usarSugerencia(tipo) {
+      const sugerencias = {
+        es: {
+          sobreMi: "Cuéntame sobre ti",
+          tesis: "Cuéntame sobre tu tesis",
+          proyectos: "¿Qué proyectos destacas?",
+          rrss: "Muéstrame tu trabajo en RRSS",
+          contacto: "¿Cómo puedo contactarte?"
+        },
+        en: {
+          sobreMi: "Tell me about yourself",
+          tesis: "Tell me about your thesis",
+          proyectos: "What projects do you highlight?",
+          rrss: "Show me your social media work",
+          contacto: "How can I contact you?"
+        }
+      };
+
+      const texto = sugerencias[idiomaActual][tipo];
+      if (!texto) return;
+
+      agregarMensaje(texto, 'usuario');
+
+      const cargando = document.getElementById('chatCargando');
+      cargando.style.display = 'block';
+
+      setTimeout(() => {
+        cargando.style.display = 'none';
+        responderBot(texto);
+      }, 350);
+    }
+
+    function validarCampo(el) {
+      const valor = el.value.trim();
+      let valido = true;
+
+      if (!valor) {
+        valido = false;
+      }
+
+      if (el.type === 'email') {
+        valido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valor);
+      }
+
+      el.classList.toggle('error', !valido);
+      return valido;
+    }
+
+    function limpiarErroresFormulario(form) {
+      form.querySelectorAll('input, textarea').forEach(campo => {
+        campo.classList.remove('error');
+      });
     }
 
     async function formularioEnviado(e) {
@@ -1489,12 +2624,44 @@
       const form = e.target;
       const exito = document.getElementById('formExito');
       const error = document.getElementById('formError');
+      const estado = document.getElementById('formEstado');
+      const submitBtn = document.getElementById('submitBtn');
 
       exito.style.display = 'none';
       error.style.display = 'none';
+      estado.textContent = '';
+
+      limpiarErroresFormulario(form);
+
+      const nombre = document.getElementById('nombre');
+      const email = document.getElementById('email');
+      const mensaje = document.getElementById('mensaje');
+
+      const camposValidos = [
+        validarCampo(nombre),
+        validarCampo(email),
+        validarCampo(mensaje)
+      ].every(Boolean);
+
+      if (!camposValidos) {
+        estado.textContent = idiomaActual === 'es'
+          ? 'Revisa los campos marcados antes de enviar.'
+          : 'Please review the highlighted fields before sending.';
+        return;
+      }
+
+      const textoBotonOriginal = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = idiomaActual === 'es' ? 'Enviando...' : 'Sending...';
 
       if (form.action.includes('TU_CODIGO')) {
+        estado.textContent = idiomaActual === 'es'
+          ? 'El formulario está listo visualmente, pero aún falta conectar Formspree.'
+          : 'The form is visually ready, but Formspree is not connected yet.';
+
         error.style.display = 'block';
+        submitBtn.disabled = false;
+        submitBtn.textContent = textoBotonOriginal;
         return;
       }
 
@@ -1507,86 +2674,186 @@
 
         if (respuesta.ok) {
           form.reset();
-          form.style.display = 'none';
+          estado.textContent = '';
           exito.style.display = 'block';
         } else {
           error.style.display = 'block';
+          estado.textContent = idiomaActual === 'es'
+            ? 'Hubo un problema al enviar. También puedes usar el correo directo.'
+            : 'There was a problem sending your message. You can also use the direct email.';
         }
       } catch (err) {
         error.style.display = 'block';
+        estado.textContent = idiomaActual === 'es'
+          ? 'No fue posible conectar con el formulario.'
+          : 'Could not connect to the form.';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = textoBotonOriginal;
       }
     }
 
-    function toggleChat() {
-      document.getElementById('chatVentana').classList.toggle('abierto');
+    function activarValidacionEnVivo() {
+      const campos = document.querySelectorAll('.form-contacto input, .form-contacto textarea');
+      campos.forEach(campo => {
+        campo.addEventListener('blur', () => validarCampo(campo));
+        campo.addEventListener('input', () => {
+          if (campo.classList.contains('error')) validarCampo(campo);
+        });
+      });
     }
 
-    function agregarMensaje(texto, tipo) {
-      const contenedor = document.getElementById('chatMensajes');
-      const burbuja = document.createElement('div');
-      burbuja.className = 'chat-burbuja ' + tipo;
-      burbuja.textContent = texto;
-      contenedor.appendChild(burbuja);
-      contenedor.scrollTop = contenedor.scrollHeight;
+    function pausarTodosLosVideos() {
+      const videos = document.querySelectorAll('.carousel-slide video');
+      videos.forEach(video => {
+        video.pause();
+        video.currentTime = 0;
+      });
     }
 
-    function obtenerRespuestaLocal(texto) {
-      const t = texto.toLowerCase();
+    function reproducirSlideActual() {
+      pausarTodosLosVideos();
+      if (!carruselVisible) return;
 
-      const respuestas = {
-        es: {
-          saludo: "¡Hola! Gracias por visitar mi portafolio. Puedo contarte sobre mi tesis, mis proyectos, mi experiencia o mis habilidades.",
-          tesis: "Mi tesis analizó el uso de eufemismos en la TV chilena combinando análisis manual y minería de texto con Python.",
-          proyectos: "En mi portafolio destaco tres líneas: tesis en periodismo de datos, un analizador de noticias con IA y contenido estratégico para redes sociales.",
-          experiencia: "Tengo experiencia en redacción y creación de contenido en espacios como Revista NOS, además de proyectos institucionales y audiovisuales.",
-          habilidades: "Mis habilidades incluyen redacción periodística, RRSS, producción audiovisual, Python, VS Code, minería de texto, APIs de IA, Excel y Word.",
-          idiomas: "Hablo español nativo, inglés intermedio y alemán básico.",
-          contacto: "Puedes contactarme por correo en svyhmeisterf@gmail.com, por LinkedIn o por WhatsApp desde la sección de contacto.",
-          default: "Puedo ayudarte con información sobre mi tesis, proyectos, experiencia, habilidades, idiomas o contacto."
-        },
-        en: {
-          saludo: "Hi! Thanks for visiting my portfolio. I can tell you about my thesis, projects, experience or skills.",
-          tesis: "My thesis analyzed euphemisms in Chilean TV by combining manual analysis and Python text mining.",
-          proyectos: "My portfolio highlights three main areas: data journalism research, an AI news analyzer and strategic social media content.",
-          experiencia: "I have experience in writing and content creation in spaces such as Revista NOS, along with institutional and audiovisual projects.",
-          habilidades: "My skills include journalistic writing, social media, audiovisual production, Python, VS Code, text mining, AI APIs, Excel and Word.",
-          idiomas: "I speak native Spanish, intermediate English and basic German.",
-          contacto: "You can contact me by email at svyhmeisterf@gmail.com, through LinkedIn or via WhatsApp in the contact section.",
-          default: "I can help with information about my thesis, projects, experience, skills, languages or contact details."
-        }
-      };
+      const slides = document.querySelectorAll('.carousel-slide');
+      const slideActivo = slides[slideActual];
+      if (!slideActivo) return;
 
-      const r = respuestas[idiomaActual];
+      const video = slideActivo.querySelector('video');
+      if (!video) return;
 
-      if (t.includes('hola') || t.includes('hi') || t.includes('hello')) return r.saludo;
-      if (t.includes('tesis') || t.includes('thesis') || t.includes('eufem')) return r.tesis;
-      if (t.includes('proyecto') || t.includes('project') || t.includes('trabajo') || t.includes('work')) return r.proyectos;
-      if (t.includes('experiencia') || t.includes('experience') || t.includes('revista nos')) return r.experiencia;
-      if (t.includes('habilidad') || t.includes('skill') || t.includes('python') || t.includes('rrss') || t.includes('excel') || t.includes('word')) return r.habilidades;
-      if (t.includes('idioma') || t.includes('language') || t.includes('english') || t.includes('alemán') || t.includes('german')) return r.idiomas;
-      if (t.includes('contacto') || t.includes('contact') || t.includes('correo') || t.includes('email') || t.includes('linkedin') || t.includes('whatsapp')) return r.contacto;
-
-      return r.default;
+      video.play().catch(() => {
+        console.log('Autoplay bloqueado por el navegador.');
+      });
     }
 
-    function enviarMensaje() {
-      const input = document.getElementById('chatInput');
-      const texto = input.value.trim();
+    function actualizarCarrusel() {
+      const track = document.getElementById('carouselTrack');
+      if (!track) return;
 
-      if (!texto) return;
+      track.style.transform = `translateX(-${slideActual * 100}%)`;
 
-      agregarMensaje(texto, 'usuario');
-      input.value = '';
+      const dots = document.querySelectorAll('.dot');
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('activo', index === slideActual);
+      });
 
-      const cargando = document.getElementById('chatCargando');
-      cargando.style.display = 'block';
-
-      setTimeout(() => {
-        cargando.style.display = 'none';
-        const respuesta = obtenerRespuestaLocal(texto);
-        agregarMensaje(respuesta, 'sofia');
-      }, 500);
+      reproducirSlideActual();
     }
+
+    function moverCarrusel(direccion) {
+      const totalSlides = document.querySelectorAll('.carousel-slide').length;
+      slideActual += direccion;
+
+      if (slideActual < 0) slideActual = totalSlides - 1;
+      if (slideActual >= totalSlides) slideActual = 0;
+
+      actualizarCarrusel();
+    }
+
+    function irASlide(index) {
+      slideActual = index;
+      actualizarCarrusel();
+    }
+
+    function abrirLightbox(src, alt) {
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightboxImg');
+
+      lightboxImg.src = src;
+      lightboxImg.alt = alt || '';
+      lightbox.classList.add('abierto');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function cerrarLightbox(event) {
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightboxImg');
+
+      if (event && event.target !== event.currentTarget) {
+        return;
+      }
+
+      lightbox.classList.remove('abierto');
+      lightboxImg.src = '';
+      document.body.style.overflow = '';
+    }
+
+    function actualizarNavScroll() {
+      const nav = document.querySelector('nav');
+      if (!nav) return;
+      nav.classList.toggle('scrolled', window.scrollY > 14);
+    }
+
+    function iniciarReveals() {
+      const items = document.querySelectorAll(`
+        .hero-copy,
+        .hero-visual,
+        .sobre-texto,
+        .sobre-foto,
+        .habilidad-card,
+        .proyecto-item,
+        .pub-card,
+        .contacto-left,
+        .contacto-inner > div:last-child
+      `);
+
+      items.forEach(el => el.classList.add('reveal-item'));
+
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.14
+      });
+
+      items.forEach(el => observer.observe(el));
+    }
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        cerrarLightbox();
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      actualizarCarrusel();
+      activarValidacionEnVivo();
+      actualizarNavScroll();
+      iniciarReveals();
+
+      const accionesIniciales = [
+        { tipo: 'scroll', target: 'proyectos', labelEs: 'Ver proyectos', labelEn: 'View projects' },
+        { tipo: 'scroll', target: 'sobre-mi', labelEs: 'Sobre mí', labelEn: 'About me' },
+        { tipo: 'scroll', target: 'contacto', labelEs: 'Contacto', labelEn: 'Contact' }
+      ];
+      agregarAccionesChat(accionesIniciales);
+
+      window.addEventListener('scroll', actualizarNavScroll);
+
+      const carrusel = document.getElementById('rrssCarousel');
+      if (!carrusel) return;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          carruselVisible = entry.isIntersecting;
+
+          if (carruselVisible) {
+            reproducirSlideActual();
+          } else {
+            pausarTodosLosVideos();
+          }
+        });
+      }, {
+        threshold: 0.6
+      });
+
+      observer.observe(carrusel);
+    });
   </script>
 </body>
 </html>
